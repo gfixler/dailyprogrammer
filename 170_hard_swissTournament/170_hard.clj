@@ -1,5 +1,5 @@
-(defn make-player [called]
-  {:name called :scores [] :opponents []})
+(defn make-player [player-name]
+  {:name player-name :scores [] :opponents []})
 
 (defn tally [player]
   (reduce + (map #(reduce + %) (:scores player))))
