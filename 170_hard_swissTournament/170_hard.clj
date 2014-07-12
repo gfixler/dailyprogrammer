@@ -20,6 +20,7 @@
   (reduce + (map #(reduce + %) (:scores player))))
 
 (defn pair-players-by-scores [players]
+  ; TODO - ACTUALLY SORT THINGS BY SWISS RULES
   (let [paired-players (sort-by tally players)]
     (partition 2 paired-players)))
 
