@@ -13,6 +13,9 @@
     [(record-game player1 score1 (play-bonus) player2)
      (record-game player2 score2 (play-bonus) player1)]))
 
+(defn already-played [player1 player2]
+  (> (count (filter #(= % (:name player2)) (:opponents player1))) 0))
+
 (defn tally [player]
   (reduce + (map #(reduce + %) (:scores player))))
 
