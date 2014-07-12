@@ -1,9 +1,6 @@
 (defn make-player [player-name]
   {:name player-name :scores [] :opponents []})
 
-(defn tally [player]
-  (reduce + (map #(reduce + %) (:scores player))))
-
 (defn record-game [player score bonus opponent]
   (merge-with into player {:scores [[score bonus]]
                            :opponents [(:name opponent)]}))
@@ -15,6 +12,9 @@
   (let [[score1 score2] (final-score)]
     [(record-game player1 score1 (play-bonus) player2)
      (record-game player2 score2 (play-bonus) player1)]))
+
+(defn tally [player]
+  (reduce + (map #(reduce + %) (:scores player))))
 
 (defn pair-players-by-scores [players]
   (partition 2 (shuffle players)))
