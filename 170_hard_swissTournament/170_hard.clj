@@ -31,5 +31,13 @@
         (recur (inc round) (pair-players-by-scores (flatten results)))
         results))))
 
-(let [players (for [i (range 1 33)] (make-player (str "Player" i)))]
-  (play-tourney players))
+(defn format-player-results [player]
+  (apply str (:name player) "\t" (interpose "\t" (map #(reduce + %) (:scores player)))))
+
+(let [players (for [i (range 1 33)] (make-player (str "P" i)))]
+  (let [tourney (play-tourney players)
+        ordered (reverse (sort-by tally (flatten tourney)))
+        display (for [ranked ordered] (format-player-results ranked))
+        header (apply str (interpose "\t" (for [i (range 1 7)] (str "Rnd" i))))]
+    (print "Name\t" header "\n")
+    (print (apply str (interpose "\n" display)))))
