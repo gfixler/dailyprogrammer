@@ -20,7 +20,8 @@
   (reduce + (map #(reduce + %) (:scores player))))
 
 (defn pair-players-by-scores [players]
-  (partition 2 (shuffle players)))
+  (let [paired-players (sort-by tally players)]
+    (partition 2 paired-players)))
 
 (defn play-tourney [players]
   (loop [round 1
