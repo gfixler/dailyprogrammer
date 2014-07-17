@@ -40,3 +40,6 @@ charInvert c
 invertStr :: String -> String
 invertStr = map charInvert
 
+intermediate171 :: String -> String
+intermediate171 = unzoomStr . invertStr . zoomStr . rot90Str . zoomStr . rectStr
+
