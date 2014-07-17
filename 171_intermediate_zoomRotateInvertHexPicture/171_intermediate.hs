@@ -6,7 +6,7 @@ everyOther [x] = [x]
 everyOther (x:y:ys) = x : everyOther ys
 
 widenStr :: String -> String
-widenStr s = concatMap (\a -> [a,a]) s
+widenStr = concatMap (\a -> [a,a])
 
 heightenStr :: String -> String
 heightenStr s = s ++ "\n" ++ s
