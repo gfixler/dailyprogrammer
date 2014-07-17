@@ -43,3 +43,8 @@ invertStr = map charInvert
 intermediate171 :: String -> String
 intermediate171 = unzoomStr . invertStr . zoomStr . rot90Str . zoomStr . rectStr
 
+upvote = "  xx\n xxxx\nxxxxxx\nxxxxxx\n  xx\n  xx\n  xx\n  xx"
+target = "xxxxxxxx\nx      x\nx xxxx x\nx x  x x\nx x  x x\nx xxxx x\nx      x\nxxxxxxxx"
+polka  = "x x x x \n x x x x\nx x x x \n x x x x\nx x x x \n x x x x\nx x x x \n x x x x"
+moon   = "  xxxxx \n xxxxxxx\nxxxxxx  \nxxxxx   \nxxxxx   \nxxxxxx  \n xxxxxxx\n  xxxxx "
+hello  = "x  x  xx\nx  x  xx\nx  x  xx\nxxxx  xx\nxxxx  xx\nx  x  xx\nx  x  xx\nx  x  xx"
