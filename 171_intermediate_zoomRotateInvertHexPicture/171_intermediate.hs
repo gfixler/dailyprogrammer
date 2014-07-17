@@ -31,3 +31,12 @@ rot90Str = unlines . transpose . reverse . lines
 unrot90Str :: String -> String
 unrot90Str = unlines . reverse . transpose . lines
 
+charInvert :: Char -> Char
+charInvert c
+    | c == 'x'  = ' '
+    | c == ' '  = 'x'
+    | otherwise = c
+
+invertStr :: String -> String
+invertStr = map charInvert
+
