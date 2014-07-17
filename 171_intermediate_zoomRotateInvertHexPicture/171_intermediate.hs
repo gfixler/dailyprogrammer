@@ -1,6 +1,6 @@
 import Data.List
 
-everyNth :: (Integral a) => a -> [b] -> [b]
+everyNth :: Int -> [b] -> [b]
 everyNth n = map snd . filter (\(a,b) -> a `mod` n == 0) . zip [1..]
 
 everyOther = everyNth 2
