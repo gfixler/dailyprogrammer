@@ -5,6 +5,14 @@ everyNth n = map snd . filter (\(a,b) -> a `mod` n == 0) . zip [1..]
 
 everyOther = everyNth 2
 
+padStr :: Int -> String -> String
+padStr n s = take n (s ++ replicate n ' ')
+
+rectStr :: String -> String
+rectStr s = unlines . map (padStr longest) $ rows
+    where rows = lines s
+          longest = foldl max 0 (map length rows)
+
 widenStr :: String -> String
 widenStr = concatMap (\a -> [a,a])
 
