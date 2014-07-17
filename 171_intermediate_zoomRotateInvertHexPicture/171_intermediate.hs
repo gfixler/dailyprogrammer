@@ -15,7 +15,7 @@ zoomStr :: String -> String
 zoomStr = unlines . map (heightenStr . widenStr) . lines
 
 unzoomStr :: String -> String
-unzoomStr = everyOther . unlines . map everyOther . lines
+unzoomStr = unlines . map everyOther . everyOther . lines
 
 rot90Str :: String -> String
 rot90Str = unlines . transpose . reverse . lines
