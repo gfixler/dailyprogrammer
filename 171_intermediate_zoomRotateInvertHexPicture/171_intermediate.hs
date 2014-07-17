@@ -1,9 +1,9 @@
 import Data.List
 
-everyOther :: [a] -> [a]
-everyOther [] = []
-everyOther [x] = [x]
-everyOther (x:y:ys) = x : everyOther ys
+everyNth :: (Integral a) => a -> [b] -> [b]
+everyNth n = map snd . filter (\(a,b) -> a `mod` n == 0) . zip [1..]
+
+everyOther = everyNth 2
 
 widenStr :: String -> String
 widenStr = concatMap (\a -> [a,a])
