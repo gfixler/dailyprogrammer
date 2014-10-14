@@ -53,3 +53,11 @@ pop s
 size :: SmartStack a -> Int
 size = stackSize . stacked
 
+stackValues :: StackL a -> [a]
+stackValues EStack = []
+stackValues (CStack head tail) = head : stackValues tail
+
+sortValues :: SortL a -> [a]
+sortValues ESort = []
+sortValues (CSort head tail) = head : sortValues tail
+
