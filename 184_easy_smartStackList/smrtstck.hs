@@ -27,3 +27,9 @@ stackPop :: StackL a -> StackL a
 stackPop EStack = EStack
 stackPop (head `CStack` tail) = tail
 
+sortDel :: Eq a => SortL a -> a -> SortL a
+sortDel ESort _ = ESort
+sortDel (head `CSort` tail) n
+    | head == n = tail
+    | otherwise = head `CSort` (sortDel tail n)
+
