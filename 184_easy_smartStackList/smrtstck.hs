@@ -41,6 +41,15 @@ stackSize :: StackL a -> Int
 stackSize EStack = 0
 stackSize (CStack head tail) = 1 + stackSize tail
 
+pop :: Eq a => SmartStack a -> SmartStack a
+pop s
+    | stackSize (stacked s) == 0 = s
+    | otherwise = SmartStack { sorted = popsort, stacked = popstack }
+    where stacklist = stacked s
+          stackhead = stackHead stacklist
+          popsort = sortDel (sorted s) stackhead
+          popstack = stackPop (stacked s)
+
 size :: SmartStack a -> Int
 size = stackSize . stacked
 
