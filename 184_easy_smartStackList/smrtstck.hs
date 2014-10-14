@@ -6,6 +6,10 @@ data StackL a = EStack | CStack a (StackL a) deriving Show
 data SmartStack a = SmartStack { sorted  :: SortL a
                                , stacked :: StackL a } deriving Show
 
+intSmartStack :: SmartStack Int
+intSmartStack = SmartStack { sorted  = ESort  :: SortL Int
+                           , stacked = EStack :: StackL Int }
+
 sortPush :: Ord a => SortL a -> a -> SortL a
 sortPush ESort n = CSort n ESort
 sortPush (CSort h t) n = (max h n) `CSort` (sortPush t (min h n))
