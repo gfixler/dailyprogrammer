@@ -33,3 +33,10 @@ sortDel (head `CSort` tail) n
     | head == n = tail
     | otherwise = head `CSort` (sortDel tail n)
 
+stackSize :: StackL a -> Int
+stackSize EStack = 0
+stackSize (CStack head tail) = 1 + stackSize tail
+
+size :: SmartStack a -> Int
+size = stackSize . stacked
+
