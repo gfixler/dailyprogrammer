@@ -18,3 +18,8 @@ stackPush :: StackL a -> a -> StackL a
 stackPush EStack n = CStack n EStack
 stackPush all@(CStack h t) n = n `CStack` all
 
+push :: Ord a => SmartStack a -> a -> SmartStack a
+push s n = SmartStack { sorted = newsort, stacked = newstack }
+    where newsort  = sortPush (sorted s) n
+          newstack = stackPush (stacked s) n
+
