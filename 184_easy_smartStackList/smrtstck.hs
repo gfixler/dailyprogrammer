@@ -23,6 +23,10 @@ push s n = SmartStack { sorted = newsort, stacked = newstack }
     where newsort  = sortPush (sorted s) n
           newstack = stackPush (stacked s) n
 
+stackHead :: StackL a -> a
+stackHead EStack = undefined
+stackHead (CStack head tail) = head
+
 stackPop :: StackL a -> StackL a
 stackPop EStack = EStack
 stackPop (head `CStack` tail) = tail
