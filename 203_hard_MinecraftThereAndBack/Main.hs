@@ -1,3 +1,5 @@
+module Main where
+
 import qualified Data.Map as M
 import System.Random (randomRIO)
 
