@@ -19,3 +19,9 @@ newWorld cell = M.fromList $ zip (genCells cell) (repeat Air)
 worldSize :: World -> Cell
 worldSize w = last $ M.keys w
 
+getBlock :: World -> Cell -> Maybe Block
+getBlock cells cell = M.lookup cell cells
+
+setBlock :: World -> Cell -> Block -> World
+setBlock w c b = M.adjust (const b) c w
+
