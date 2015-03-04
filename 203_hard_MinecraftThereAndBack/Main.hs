@@ -16,3 +16,6 @@ genCells (l,w,h) = [(x,y,z) | x <- [0..l-1], y <- [0..w-1], z <- [0..h-1]]
 newWorld :: Cell -> World
 newWorld cell = M.fromList $ zip (genCells cell) (repeat Air)
 
+worldSize :: World -> Cell
+worldSize w = last $ M.keys w
+
