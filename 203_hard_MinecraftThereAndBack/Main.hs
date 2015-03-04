@@ -10,7 +10,9 @@ type XYZ = (Int, Int, Int)
 data Block = Air | Dirt | Sand | Lava deriving (Show)
 type World = (XYZ, M.Map XYZ Block)
 
+genCells :: XYZ -> [XYZ]
+genCells (l,w,h) = [(x,y,z) | x <- [0..l-1], y <- [0..w-1], z <- [0..h-1]]
+
 newWorld :: XYZ -> World
-newWorld (l,w,h) = ((l,w,h), M.fromList $ zip cells (repeat Air))
-    where cells = [(x,y,z) | x <- [0..l-1], y <- [0..w-1], z <- [0..h-1]]
+newWorld xyz = (xyz, M.fromList $ zip (genCells xyz) (repeat Air))
 
