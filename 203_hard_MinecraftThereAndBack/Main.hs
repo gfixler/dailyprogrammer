@@ -29,3 +29,6 @@ collapse xs = concat $ reorder $ group xs
           reorder (x:xs)                    = x : reorder xs
           reorder []                        = []
 
+genCore :: Cell -> Core
+genCore (x,y,top) = [(x,y,z) | z <- [top,top-1..0]]
+
