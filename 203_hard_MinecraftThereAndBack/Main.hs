@@ -2,10 +2,6 @@ module Main where
 
 import Data.List (group)
 import qualified Data.Map as M
-import System.Random (randomRIO)
-
-pick :: [a] -> IO a
-pick xs = randomRIO (0, length xs - 1) >>= return . (xs !!)
 
 type Cell = (Int, Int, Int)
 data Block = Air | Dirt | Sand | Lava deriving (Eq, Show)
