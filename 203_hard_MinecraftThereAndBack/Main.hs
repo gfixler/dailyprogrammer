@@ -32,3 +32,7 @@ collapse xs = concat $ reorder $ group xs
 genCore :: Cell -> Core
 genCore (x,y,top) = [(x,y,z) | z <- [top,top-1..0]]
 
+sampleCore :: World -> Int -> Int -> Maybe [Block]
+sampleCore w x y = sequence $ map (getBlock w) $ genCore (x,y,z)
+    where (_,_,z) = worldSize w
+
