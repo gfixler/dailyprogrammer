@@ -1,5 +1,6 @@
 module Main where
 
+import Data.List (group)
 import qualified Data.Map as M
 import System.Random (randomRIO)
 
@@ -25,12 +26,10 @@ getBlock cells cell = M.lookup cell cells
 setBlock :: World -> Cell -> Block -> World
 setBlock w c b = M.adjust (const b) c w
 
-collapse1 :: [Block] -> [Block]
-collapse1 [] = []
-collapse1 (Sand:Air:xs) = Air : collapse1 (Sand : xs)
-collapse1 (Lava:Air:xs) = Lava : collapse1 (Lava : xs)
-collapse1 (x:xs) = x : collapse1 xs
-
-collapse :: [Block] -> [Block]
-collapse bs = let cs = collapse1 bs in if bs == cs then cs else collapse cs
+collapse :: [Block] -> [Block] -- [bottom..top] ordering
+collapse xs = concat $ reorder $ group xs
+    where reorder (a@(Air:_):s@(Sand:_):xs) = s : reorder (a:xs)
+          reorder (a@(Air:_):l@(Lava:_):xs) = map (const Lava) a : l : reorder xs
+          reorder (x:xs)                    = x : reorder xs
+          reorder []                        = []
 
