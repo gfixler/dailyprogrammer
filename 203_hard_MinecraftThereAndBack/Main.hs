@@ -27,8 +27,8 @@ setBlock w c b = M.adjust (const b) c w
 
 collapse1 :: [Block] -> [Block]
 collapse1 [] = []
-collapse1 (Air:Sand:xs) = Sand : Air : collapse1 xs
-collapse1 (Air:Lava:xs) = Lava : Lava : collapse1 xs
+collapse1 (Sand:Air:xs) = Air : collapse1 (Sand : xs)
+collapse1 (Lava:Air:xs) = Lava : collapse1 (Lava : xs)
 collapse1 (x:xs) = x : collapse1 xs
 
 collapse :: [Block] -> [Block]
