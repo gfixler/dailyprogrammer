@@ -5,6 +5,7 @@ import qualified Data.Map as M
 
 type Cell = (Int, Int, Int)
 data Block = Air | Dirt | Sand | Lava deriving (Eq, Show)
+type Core = [(Cell,Block)]
 type World = M.Map Cell Block
 
 genCells :: Cell -> [Cell]
@@ -29,10 +30,9 @@ collapse xs = concat $ reorder $ group xs
           reorder (x:xs)                    = x : reorder xs
           reorder []                        = []
 
-genCore :: Cell -> Core
-genCore (x,y,top) = [(x,y,z) | z <- [top,top-1..0]]
-
-sampleCore :: World -> Int -> Int -> Maybe [Block]
-sampleCore w x y = sequence $ map (getBlock w) $ genCore (x,y,z)
-    where (_,_,z) = worldSize w
+sampleCore :: World -> Int -> Int -> Maybe Core
+sampleCore w x y = fmap (zip core) sample
+    where (_,_,top) = worldSize w
+          core      = [(x,y,z) | z <- [top,top-1..0]]
+          sample    = sequence $ map (getBlock w) $ core
 
