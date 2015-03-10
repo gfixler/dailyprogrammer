@@ -15,11 +15,11 @@ parseFDate d = readTime defaultTimeLocale "%F" d
 
 main = do
     args <- getArgs
-    when (length args /= 2) wrongNumArgs
+    when (length args /= 2) handleBadArgs
     return ()
 
-wrongNumArgs :: IO ()
-wrongNumArgs = do
-    putStrLn "Must pass 2 dates in YYYY-MM-DD format"
+handleBadArgs :: IO a
+handleBadArgs = do
+    putStrLn "Must pass in 2 dates in YYYY-MM-DD format"
     exitFailure
 
