@@ -1,5 +1,8 @@
 module Main where
 
+-- This module contains a Haskell solution to:
+-- http://www.reddit.com/r/dailyprogrammer/comments/2ygsxs/20150309_challenge_205_easy_friendly_date_ranges/
+
 import Control.Monad        (when)
 import Data.Time.Clock      (getCurrentTime, diffUTCTime, utctDay, UTCTime)
 import Data.Time.Calendar   (toGregorian)
