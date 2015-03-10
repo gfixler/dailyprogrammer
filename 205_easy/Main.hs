@@ -19,6 +19,7 @@ main = do
     let [a, b] = args
     t1 <- readDateOrDie a
     t2 <- readDateOrDie b
+    when (compare t1 t2 == GT) handleBadDateOrder
     return ()
 
 readDateOrDie :: String -> IO UTCTime
@@ -29,5 +30,10 @@ readDateOrDie d = case parseFDate d of
 handleBadArgs :: IO a
 handleBadArgs = do
     putStrLn "Must pass in 2 dates in YYYY-MM-DD format"
+    exitFailure
+
+handleBadDateOrder :: IO a
+handleBadDateOrder = do
+    putStrLn "Dates must be passed in order (earlier one first)"
     exitFailure
 
