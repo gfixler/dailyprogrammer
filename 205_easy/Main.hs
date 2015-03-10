@@ -16,6 +16,17 @@ parseFDate t = parseTime defaultTimeLocale "%F" t
 month :: UTCTime -> String
 month t = formatTime defaultTimeLocale "%B" t
 
+ordinalSuffix :: Int -> String
+ordinalSuffix n | n > 10 && n < 20 = "th"
+ordinalSuffix n = case n `mod` 10 of
+                      1 -> "st"
+                      2 -> "nd"
+                      3 -> "rd"
+                      _ -> "th"
+
+ordinal :: Int -> String
+ordinal n = show n ++ ordinalSuffix n
+
 main = do
     args <- getArgs
     when (length args /= 2) dieBadArgs
