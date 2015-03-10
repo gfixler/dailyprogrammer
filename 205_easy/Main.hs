@@ -1,7 +1,7 @@
 import Control.Monad        (when)
-import Data.Time.Clock      (getCurrentTime, utctDay, UTCTime)
+import Data.Time.Clock      (getCurrentTime, diffUTCTime, utctDay, UTCTime)
 import Data.Time.Calendar   (toGregorian)
-import Data.Time.Format     (formatTime, parseTime)
+import Data.Time.Format     (formatTime, readTime, parseTime)
 import System.Environment   (getArgs)
 import System.Locale        (defaultTimeLocale)
 import System.Exit          (exitFailure)
@@ -57,6 +57,17 @@ friendlyDates today t1 t2
           (y2,m2,d2) = ymd t2
           full t y m d = month t ++ " " ++ ordinal d ++ ", " ++ show y
 
+testFriendlyDates :: Bool
+testFriendlyDates =
+    get "2015-07-01" "2015-07-04" == "July 1st - 4th"
+    && get "2015-12-01" "2016-02-03" == "December 1st - February 3rd"
+    && get "2015-12-01" "2017-02-03" == "December 1st, 2015 - February 3rd, 2017"
+    && get "2016-03-01" "2016-05-05" == "March 1st - May 5th, 2016"
+    && get "2017-01-01" "2017-01-01" == "January 1st, 2017"
+    && get "2022-09-05" "2023-09-04" == "September 5th, 2022 - September 4th, 2023"
+    where convert t = readTime defaultTimeLocale "%F" t :: UTCTime
+          today     = convert "2015-03-09" -- fix day against tests
+          get t1 t2 = friendlyDates today (convert t1) (convert t2)
 
 readDateOrDie :: String -> IO UTCTime
 readDateOrDie d = case parseFDate d of
