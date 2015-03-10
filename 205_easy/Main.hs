@@ -18,6 +18,11 @@ main = do
     when (length args /= 2) handleBadArgs
     return ()
 
+readDateOrDie :: String -> IO UTCTime
+readDateOrDie d = case parseFDate d of
+    Just t1 -> return t1
+    Nothing -> handleBadArgs
+
 handleBadArgs :: IO a
 handleBadArgs = do
     putStrLn "Must pass in 2 dates in YYYY-MM-DD format"
