@@ -16,6 +16,9 @@ parseFDate d = parseTime defaultTimeLocale "%F" d
 main = do
     args <- getArgs
     when (length args /= 2) handleBadArgs
+    let [a, b] = args
+    t1 <- readDateOrDie a
+    t2 <- readDateOrDie b
     return ()
 
 readDateOrDie :: String -> IO UTCTime
