@@ -1,7 +1,7 @@
 import Control.Monad        (when)
 import Data.Time.Clock      (getCurrentTime, utctDay, UTCTime)
 import Data.Time.Calendar   (toGregorian)
-import Data.Time.Format     (readTime)
+import Data.Time.Format     (parseTime)
 import System.Environment   (getArgs)
 import System.Locale        (defaultTimeLocale)
 import System.Exit          (exitFailure)
@@ -9,9 +9,9 @@ import System.Exit          (exitFailure)
 ymd :: UTCTime -> (Integer,Int,Int)
 ymd = toGregorian . utctDay
 
-parseFDate :: String -> UTCTime
+parseFDate :: String -> Maybe UTCTime
 -- converts "%F"-format date string ("YYYY-MM-DD")
-parseFDate d = readTime defaultTimeLocale "%F" d
+parseFDate d = parseTime defaultTimeLocale "%F" d
 
 main = do
     args <- getArgs
