@@ -20,7 +20,12 @@ main = do
     t1 <- readDateOrDie a
     t2 <- readDateOrDie b
     when (compare t1 t2 == GT) handleBadDateOrder
+    today <- getCurrentTime
+    putStrLn $ friendlyDates today t1 t2
     return ()
+
+friendlyDates :: UTCTime -> UTCTime -> UTCTime -> String
+friendlyDates today t1 t2 = "temp"
 
 readDateOrDie :: String -> IO UTCTime
 readDateOrDie d = case parseFDate d of
