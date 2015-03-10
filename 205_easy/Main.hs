@@ -1,3 +1,5 @@
+module Main where
+
 import Control.Monad        (when)
 import Data.Time.Clock      (getCurrentTime, diffUTCTime, utctDay, UTCTime)
 import Data.Time.Calendar   (toGregorian)
