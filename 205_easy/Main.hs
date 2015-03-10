@@ -40,22 +40,22 @@ main = do
 
 friendlyDates :: UTCTime -> UTCTime -> UTCTime -> String
 friendlyDates today t1 t2
-    | y1 == y2 && m1 == m2 && d1 == d2 =
-        month t1 ++ " " ++ ordinal d1 ++ ", " ++ show y1
-    | year == y1 && year == y2 && m1 == m2 =
-        month t1 ++ " " ++ ordinal d1 ++ " - " ++ ordinal d2
-    | year == y1 && year /= y2 && m1 == m2 && d1 == d2 =
-        full t1 y1 m1 d1 ++ " - " ++ full t2 y2 m2 d2
-    | y1 == y2 && year /= y1 && year /= y2 =
-        month t1 ++ " " ++ ordinal d1 ++ " - " ++ month t2 ++ " " ++ ordinal d2 ++ ", " ++ show y1
-    | diffUTCTime t2 t1 >= 31449600 =
-        full t1 y1 m1 d1 ++ " - " ++ full t2 y2 m2 d2
-    | diffUTCTime t2 t1 < 31449600 =
-        month t1 ++ " " ++ ordinal d1 ++ " - " ++ month t2 ++ " " ++ ordinal d2
-    where (year,_,_) = ymd today
-          (y1,m1,d1) = ymd t1
-          (y2,m2,d2) = ymd t2
-          full t y m d = month t ++ " " ++ ordinal d ++ ", " ++ show y
+    | exactSameDay  = full t1 y1 m1 d2
+    | monthThisYear = monthDay t1 d1   ++ " - " ++ ordinal d2
+    | inFutureYear  = monthDay t1 d1   ++ " - " ++ full t2 y2 m2 d2
+    | atLeastAYear  = full t1 y1 m1 d1 ++ " - " ++ full t2 y2 m2 d2
+    | notQuiteAYear = monthDay t1 d1   ++ " - " ++ monthDay t2 d2
+    where (yr,_,_)      = ymd today
+          (y1,m1,d1)    = ymd t1
+          (y2,m2,d2)    = ymd t2
+          yearInSeconds = 31449600 -- actually 364*24*60*60
+          exactSameDay  = y1 == y2 && m1 == m2 && d1 == d2
+          monthThisYear = yr == y1 && yr == y2 && m1 == m2
+          inFutureYear  = y1 == y2 && yr /= y1 && yr /= y2
+          atLeastAYear  = diffUTCTime t2 t1 >= yearInSeconds
+          notQuiteAYear = diffUTCTime t2 t1 < yearInSeconds
+          full t y m d  = month t ++ " " ++ ordinal d ++ ", " ++ show y
+          monthDay t d  = month t ++ " " ++ ordinal d
 
 testFriendlyDates :: Bool
 testFriendlyDates =
