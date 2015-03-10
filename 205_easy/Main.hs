@@ -39,7 +39,24 @@ main = do
     return ()
 
 friendlyDates :: UTCTime -> UTCTime -> UTCTime -> String
-friendlyDates today t1 t2 = "temp"
+friendlyDates today t1 t2
+    | y1 == y2 && m1 == m2 && d1 == d2 =
+        month t1 ++ " " ++ ordinal d1 ++ ", " ++ show y1
+    | year == y1 && year == y2 && m1 == m2 =
+        month t1 ++ " " ++ ordinal d1 ++ " - " ++ ordinal d2
+    | year == y1 && year /= y2 && m1 == m2 && d1 == d2 =
+        full t1 y1 m1 d1 ++ " - " ++ full t2 y2 m2 d2
+    | y1 == y2 && year /= y1 && year /= y2 =
+        month t1 ++ " " ++ ordinal d1 ++ " - " ++ month t2 ++ " " ++ ordinal d2 ++ ", " ++ show y1
+    | diffUTCTime t2 t1 >= 31449600 =
+        full t1 y1 m1 d1 ++ " - " ++ full t2 y2 m2 d2
+    | diffUTCTime t2 t1 < 31449600 =
+        month t1 ++ " " ++ ordinal d1 ++ " - " ++ month t2 ++ " " ++ ordinal d2
+    where (year,_,_) = ymd today
+          (y1,m1,d1) = ymd t1
+          (y2,m2,d2) = ymd t2
+          full t y m d = month t ++ " " ++ ordinal d ++ ", " ++ show y
+
 
 readDateOrDie :: String -> IO UTCTime
 readDateOrDie d = case parseFDate d of
