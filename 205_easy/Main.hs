@@ -15,11 +15,11 @@ parseFDate d = parseTime defaultTimeLocale "%F" d
 
 main = do
     args <- getArgs
-    when (length args /= 2) handleBadArgs
+    when (length args /= 2) dieBadArgs
     let [a, b] = args
     t1 <- readDateOrDie a
     t2 <- readDateOrDie b
-    when (compare t1 t2 == GT) handleBadDateOrder
+    when (compare t1 t2 == GT) dieBadDateOrder
     today <- getCurrentTime
     putStrLn $ friendlyDates today t1 t2
     return ()
@@ -30,15 +30,15 @@ friendlyDates today t1 t2 = "temp"
 readDateOrDie :: String -> IO UTCTime
 readDateOrDie d = case parseFDate d of
     Just t1 -> return t1
-    Nothing -> handleBadArgs
+    Nothing -> dieBadArgs
 
-handleBadArgs :: IO a
-handleBadArgs = do
+dieBadArgs :: IO a
+dieBadArgs = do
     putStrLn "Must pass in 2 dates in YYYY-MM-DD format"
     exitFailure
 
-handleBadDateOrder :: IO a
-handleBadDateOrder = do
+dieBadDateOrder :: IO a
+dieBadDateOrder = do
     putStrLn "Dates must be passed in order (earlier one first)"
     exitFailure
 
