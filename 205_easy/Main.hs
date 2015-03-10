@@ -6,15 +6,17 @@ import System.Environment   (getArgs)
 import System.Locale        (defaultTimeLocale)
 import System.Exit          (exitFailure)
 
-ymd :: UTCTime -> (Integer,Int,Int)
-ymd = toGregorian . utctDay
-
-parseFDate :: String -> Maybe UTCTime
--- converts "%F"-format date string ("YYYY-MM-DD")
-parseFDate t = parseTime defaultTimeLocale "%F" t
+yearMonthDay :: UTCTime -> (Integer,Int,Int)
+-- converts to (YYYY,MM,DD) triple
+yearMonthDay = toGregorian . utctDay
 
 month :: UTCTime -> String
+-- converts to month name, e.g. "November"
 month t = formatTime defaultTimeLocale "%B" t
+
+parseFDate :: String -> Maybe UTCTime
+-- attempts to convert from "YYYY-MM-DD" format
+parseFDate t = parseTime defaultTimeLocale "%F" t
 
 ordinalSuffix :: Int -> String
 ordinalSuffix n | n > 10 && n < 20 = "th"
@@ -45,9 +47,9 @@ friendlyDates today t1 t2
     | inFutureYear  = monthDay t1 d1   ++ " - " ++ full t2 y2 m2 d2
     | atLeastAYear  = full t1 y1 m1 d1 ++ " - " ++ full t2 y2 m2 d2
     | notQuiteAYear = monthDay t1 d1   ++ " - " ++ monthDay t2 d2
-    where (yr,_,_)      = ymd today
-          (y1,m1,d1)    = ymd t1
-          (y2,m2,d2)    = ymd t2
+    where (yr,_,_)      = yearMonthDay today
+          (y1,m1,d1)    = yearMonthDay t1
+          (y2,m2,d2)    = yearMonthDay t2
           yearInSeconds = 31449600 -- actually 364*24*60*60
           exactSameDay  = y1 == y2 && m1 == m2 && d1 == d2
           monthThisYear = yr == y1 && yr == y2 && m1 == m2
