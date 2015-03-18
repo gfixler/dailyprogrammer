@@ -1,5 +1,5 @@
 import qualified Data.Set as S
-import System.Environment
+import System.Environment (getArgs)
 
 gridCoords :: Int -> Int -> [(Int, Int)]
 gridCoords x y = [(x,y) | y <- [0..succ x], x <- [0..succ y]]
