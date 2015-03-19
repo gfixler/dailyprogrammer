@@ -16,10 +16,6 @@ circWidths r = r : width r 1
 gridPoints :: Int -> Int -> [(Int, Int)]
 gridPoints x y = [(x,y) | y <- [0..succ x], x <- [0..succ y]]
 
-inRadiusPoints :: Int -> [(Int, Int)]
-inRadiusPoints n = [(x,y) | y <- [-n..n], x <- [-n..n], radius x y < n]
-    where radius x y = round $ hypot (fromIntegral x) (fromIntegral y)
-
 findPlants :: Int -> Int -> String -> S.Set (Int, Int)
 findPlants w h xs = S.fromList [c | (c,x) <- zip cs xs, x == 'x']
     where cs = gridPoints w h
