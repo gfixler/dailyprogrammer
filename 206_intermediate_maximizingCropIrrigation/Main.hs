@@ -6,6 +6,7 @@ hypot :: Floating a => a -> a -> a
 hypot x y = sqrt $ x * x + y * y
 
 circWidths :: Int -> [Int]
+circWidths 0 = []
 circWidths r = r : width r 1
     where width x y | x == 0    = []
                     | h >= r    = width (pred x) y
