@@ -2,6 +2,9 @@ import Data.Monoid (mconcat)
 import qualified Data.Set as S (Set, fromList)
 import System.Environment (getArgs)
 
+hypot :: Floating a => a -> a -> a
+hypot x y = sqrt $ x * x + y * y
+
 gridPoints :: Int -> Int -> [(Int, Int)]
 gridPoints x y = [(x,y) | y <- [0..succ x], x <- [0..succ y]]
 
