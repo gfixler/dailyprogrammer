@@ -5,6 +5,14 @@ import System.Environment (getArgs)
 hypot :: Floating a => a -> a -> a
 hypot x y = sqrt $ x * x + y * y
 
+circWidths :: Int -> [Int]
+circWidths r = r : width r 1
+    where width x y | x == 0    = []
+                    | h >= r    = width (pred x) y
+                    | otherwise = x : width x (succ y)
+                    where
+                        h = floor $ hypot (fromIntegral x) (fromIntegral y)
+
 gridPoints :: Int -> Int -> [(Int, Int)]
 gridPoints x y = [(x,y) | y <- [0..succ x], x <- [0..succ y]]
 
