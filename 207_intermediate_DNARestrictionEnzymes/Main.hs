@@ -9,7 +9,7 @@ data End = Sticky | Blunt
 data RE = RE String End String String
 
 toStrand :: String -> Strand
-toStrand = Strand . filter (`elem` "gcta") . map toLower
+toStrand = Strand . filter (`elem` "acgt") . map toLower
 
 main = do
     [file] <- getArgs
