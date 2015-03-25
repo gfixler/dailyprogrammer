@@ -12,6 +12,6 @@ toStrand = Strand . filter (`elem` "gcta") . map toLower
 main = do
     [file] <- getArgs
     contents <- readFile file
-    let code = filter (`elem` "gcta") $ map toLower contents
-    putStrLn code
+    let code = toStrand contents
+    print code
 
