@@ -1,3 +1,5 @@
+module Main (main, End, RE, toStrand) where
+
 import Data.Char (toLower)
 import System.Environment (getArgs)
 import System.IO (readFile)
