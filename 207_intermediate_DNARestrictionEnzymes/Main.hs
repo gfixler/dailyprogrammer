@@ -6,6 +6,9 @@ newtype Strand = Strand String deriving (Show)
 data End = Sticky | Blunt
 data RE = RE String End String String
 
+toStrand :: String -> Strand
+toStrand = Strand . filter (`elem` "gcta") . map toLower
+
 main = do
     [file] <- getArgs
     contents <- readFile file
