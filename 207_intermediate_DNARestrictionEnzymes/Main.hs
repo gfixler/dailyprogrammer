@@ -5,8 +5,8 @@ import System.Environment (getArgs)
 import System.IO (readFile)
 
 newtype Strand = Strand String deriving (Show)
-data End = Sticky | Blunt
-data RE = RE String End String String
+data End = Sticky | Blunt deriving (Show)
+data RE = RE String End Strand Strand deriving (Show)
 
 toStrand :: String -> Strand
 toStrand = Strand . filter (`elem` "acgt") . map toLower
