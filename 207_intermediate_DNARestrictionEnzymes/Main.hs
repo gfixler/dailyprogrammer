@@ -1,4 +1,4 @@
-module Main (main, End, unsafeToStrand) where
+module Main (main, End, unsafeToStrand, toRecSeq, toRECutter) where
 
 import Data.Char (toLower)
 import Data.List (findIndices)
