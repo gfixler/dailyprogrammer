@@ -18,8 +18,8 @@ toRecSeq s = case findIndices (== '^') s of
                  [n] -> Right (unsafeToStrand $ reverse $ take n s, unsafeToStrand $ drop (n+1) s)
                  _   -> Left ("More than 1 '^' in cut sequence " ++ s)
 
-toRE :: String -> End -> String -> Either String RE
-toRE n e s = case toRecSeq s of
+toRECutter :: String -> End -> String -> Either String RE
+toRECutter n e s = case toRecSeq s of
                  Right (l, r) -> Right $ RE n e l r
                  Left x       -> Left x
 
