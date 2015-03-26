@@ -18,11 +18,10 @@ toRecSeq s = case findIndices (== '^') s of
                  [n] -> Right (toStrand $ reverse $ take n s, toStrand $ drop (n+1) s)
                  _   -> Left ("More than 1 '^' in cut sequence " ++ s)
 
-toRE :: String -> End -> String -> RE
-toRE n e s = RE n e l r
-    where (l',r') = span (/= '^') s
-          l = toStrand $ reverse l'
-          r = toStrand $ tail r'
+toRE :: String -> End -> String -> Either String RE
+toRE n e s = case toRecSeq s of
+                 Right (l, r) -> Right $ RE n e l r
+                 Left x       -> Left x
 
 main = do
     [file] <- getArgs
