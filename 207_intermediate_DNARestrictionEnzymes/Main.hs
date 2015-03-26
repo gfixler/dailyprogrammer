@@ -11,9 +11,9 @@ data RE = RE String End Strand Strand deriving (Show)
 
 makeCutter :: String -> Either String (Strand, Strand)
 makeCutter s = case findIndices (== '^') s of
-                 []  -> Left ("No '^' in cut sequence " ++ s)
+                 []  -> Left ("No cut marker ('^') in recognition sequence " ++ s)
                  [n] -> Right (filterForDNA $ reverse $ take n s, filterForDNA $ drop (n+1) s)
-                 _   -> Left ("More than 1 '^' in cut sequence " ++ s)
+                 _   -> Left ("More than 1 cut marker ('^') in recognition sequence " ++ s)
 
 toRECutter :: String -> End -> String -> Either String RE
 toRECutter n e s = case makeCutter s of
