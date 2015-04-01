@@ -15,3 +15,7 @@ radGradVal :: (Floating a, RealFrac a) => [b] -> (a, a) -> a -> a -> (a, a) -> b
 radGradVal cs (cx,cy) ri ro (x,y) = clampSelect cs ri ro d
     where d = hypot2D (cx,cy) (x,y)
 
+renderRadial :: (Enum a, Floating a, RealFrac a) => [b] -> a -> a -> (a, a) -> a -> a -> [[b]]
+renderRadial cs w h cp ri ro = [[radGradVal cs cp ri ro (x,y)
+                               | x <- [0..w]] | y <- [0..h]]
+
