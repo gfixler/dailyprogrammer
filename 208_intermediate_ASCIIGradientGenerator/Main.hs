@@ -1,6 +1,11 @@
 clamp :: Ord a => a -> a -> a -> a
 clamp l h v = min h (max l v)
 
+clampSelect :: RealFrac a => [b] -> a -> a -> a -> b
+clampSelect xs l h v = xs !! x
+    where s = ((clamp l h v) - l) / (h - l)
+          x = round $ s * fromIntegral (length xs - 1)
+
 hypot2D :: Floating a => (a, a) -> (a, a) -> a
 hypot2D (x1,y1) (x2,y2) = sqrt (x^2 + y^2)
     where x = x2 - x1
