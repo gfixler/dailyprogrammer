@@ -19,25 +19,25 @@ renderRadial :: (Enum a, Floating a, RealFrac a) => [b] -> a -> a -> (a, a) -> a
 renderRadial cs w h cp ri ro = [[radGradVal cs cp ri ro (x,y)
                                | x <- [0..w]] | y <- [0..h]]
 
+data World = World { width :: Int
+                   , height :: Int
+                   , x     :: Int
+                   , y     :: Int
+                   , ri     :: Int
+                   , ro     :: Int
+                   , s      :: [Char]
+                   }
+
+instance Show World where
+    show w = "w" ++ show (width w)
+           ++ " h" ++ show (height w)
+           ++ " x" ++ show (x w)
+           ++ " y" ++ show (y w)
+           ++ " i" ++ show (ri w)
+           ++ " o" ++ show (ro w)
+           ++ " " ++ show (s w)
+
 main = do
-    wh <- getLine
-    let [w', h'] = words wh
-        w        = read w' :: Int
-        h        = read h' :: Int
-    s <- getLine
-    c <- getLine
-    let cs = words c
-    case head cs of
-        "radial" -> let [x', y', ri', ro'] = tail cs
-                        in do
-                            let x = read x' :: Int
-                                y = read y' :: Int
-                                ri = read ri' :: Int
-                                ro = read ro' :: Int
-                                img = renderRadial s (fromIntegral w)
-                                                     (fromIntegral h)
-                                                     (fromIntegral x, fromIntegral y)
-                                                     (fromIntegral ri)
-                                                     (fromIntegral ro)
-                            putStr $ unlines $ img
+    let w = World 44 22 0 0 0 4 " .,;+%#@"
+    print w
 
