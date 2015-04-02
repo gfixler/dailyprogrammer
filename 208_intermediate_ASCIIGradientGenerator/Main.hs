@@ -38,15 +38,16 @@ instance Show World where
            ++ " " ++ show (s w)
 
 worldDefault :: World
-worldDefault = World 44 22 0 0 0 4 " .,;+%#@"
+worldDefault = World 40 15 0 0 0 4 " .,;+%#@"
 
 data Mode = Window | RadCen | RadIn | RadOut deriving (Show)
+modeDefault = Window
 
 main = do
     hSetBuffering stdin NoBuffering
     hSetBuffering stdout NoBuffering
     hSetEcho stdout False
-    loop Window worldDefault
+    loop modeDefault worldDefault
 
 render mode a@(World w h x y i o s) = do
     putStr $ unlines $ renderRadial s (fromIntegral w)
