@@ -62,6 +62,7 @@ loop mode a@(World w h x y i o s) = do
     k <- getChar
     case k of
         'q' -> return ()
+        'r' -> loop modeDefault worldDefault
         'w' -> loop Window $ World w h x y i o s
         'c' -> loop RadCen $ World w h x y i o s
         'i' -> loop RadIn $ World w h x y i o s
