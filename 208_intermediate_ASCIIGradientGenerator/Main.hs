@@ -29,10 +29,8 @@ data World = World { width :: Int
                    }
 
 instance Show World where
-    show w = "w" ++ show (width w)
-           ++ " h" ++ show (height w)
-           ++ " x" ++ show (x w)
-           ++ " y" ++ show (y w)
+    show w = "wh(" ++ show (width w) ++ "," ++ show (height w) ++ ")"
+           ++ " xy(" ++ show (x w) ++ "," ++ show (y w) ++ ")"
            ++ " i" ++ show (ri w)
            ++ " o" ++ show (ro w)
            ++ " " ++ show (s w)
