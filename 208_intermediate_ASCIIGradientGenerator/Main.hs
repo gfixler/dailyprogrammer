@@ -40,7 +40,7 @@ instance Show World where
 worldDefault :: World
 worldDefault = World 44 22 0 0 0 4 " .,;+%#@"
 
-data Mode = Window | RadCen | RadIn | RadOut
+data Mode = Window | RadCen | RadIn | RadOut deriving (Show)
 
 main = do
     let w = worldDefault
@@ -51,6 +51,7 @@ main = do
 
 loop mode a@(World w h x y i o s) = do
     print a
+    print mode
     k <- getChar
     case k of
         'q' -> return ()
