@@ -40,6 +40,8 @@ instance Show World where
 worldDefault :: World
 worldDefault = World 44 22 0 0 0 4 " .,;+%#@"
 
+data Mode = Window | RadCen | RadIn | RadOut
+
 main = do
     let w = worldDefault
     hSetBuffering stdin NoBuffering
