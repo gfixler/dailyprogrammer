@@ -48,14 +48,17 @@ main = do
     hSetEcho stdout False
     loop Window worldDefault
 
-loop mode a@(World w h x y i o s) = do
-    putStr $ unlines $ renderRadial s (fromIntegral w)
-                                      (fromIntegral h)
-                                      (fromIntegral x,fromIntegral y)
-                                      (fromIntegral i)
-                                      (fromIntegral o)
+render mode a@(World w h x y i o s) = do
     print a
     print mode
+    putStr $ unlines $ renderRadial s (fromIntegral w)
+                                    (fromIntegral h)
+                                    (fromIntegral x,fromIntegral y)
+                                    (fromIntegral i)
+                                    (fromIntegral o)
+
+loop mode a@(World w h x y i o s) = do
+    render mode a
     k <- getChar
     case k of
         'q' -> return ()
