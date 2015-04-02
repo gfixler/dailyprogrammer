@@ -43,11 +43,10 @@ worldDefault = World 44 22 0 0 0 4 " .,;+%#@"
 data Mode = Window | RadCen | RadIn | RadOut deriving (Show)
 
 main = do
-    let w = worldDefault
     hSetBuffering stdin NoBuffering
     hSetBuffering stdout NoBuffering
     hSetEcho stdout False
-    loop Window w
+    loop Window worldDefault
 
 loop mode a@(World w h x y i o s) = do
     putStr $ unlines $ renderRadial s (fromIntegral w)
