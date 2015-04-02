@@ -55,6 +55,10 @@ loop mode a@(World w h x y i o s) = do
     k <- getChar
     case k of
         'q' -> return ()
+        'w' -> loop Window $ World w h x y i o s
+        'c' -> loop RadCen $ World w h x y i o s
+        'i' -> loop RadIn $ World w h x y i o s
+        'o' -> loop RadOut $ World w h x y i o s
         'f' -> loop mode $ World (succ w) h x y i o s
         'b' -> loop mode $ World (max 1 (pred w)) h x y i o s
         'u' -> loop mode $ World w (max 1 (pred h)) x y i o s
