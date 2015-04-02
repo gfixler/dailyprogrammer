@@ -1,3 +1,5 @@
+import System.IO
+
 clamp :: Ord a => a -> a -> a -> a
 clamp l h v = min h (max l v)
 
@@ -37,5 +39,35 @@ instance Show World where
 
 main = do
     let w = World 44 22 0 0 0 4 " .,;+%#@"
-    print w
+    hSetBuffering stdin NoBuffering
+    hSetBuffering stdout NoBuffering
+    hSetEcho stdout False
+    loop w
+
+loop a@(World w h x y i o s) = do
+    print a
+    k <- getChar
+    case k of
+        'q' -> return ()
+        'f' -> loop $ World (succ w) h x y i o s
+        'b' -> loop $ World (max 1 (pred w)) h x y i o s
+        'u' -> loop $ World w (max 1 (pred h)) x y i o s
+        'd' -> loop $ World w (succ h) x y i o s
+        'h' -> loop $ World w h (pred x) y i o s
+        'l' -> loop $ World w h (succ x) y i o s
+        'j' -> loop $ World w h x (succ y) i o s
+        'k' -> loop $ World w h x (pred y) i o s
+        ']' -> loop $ World w h x y (succ i) o s
+        '[' -> loop $ World w h x y (max 0 (pred i)) o s
+        '>' -> loop $ World w h x y i (succ o) s
+        '<' -> loop $ World w h x y i (max 0 (pred o)) s
+        's' -> do
+            putStr "string: "
+            hSetEcho stdout True
+            s' <- getLine
+            hSetEcho stdout False
+            loop $ World w h x y i o s'
+        c   -> do
+            putStrLn $ show c
+            loop $ World w h x y i o s
 
