@@ -37,8 +37,11 @@ instance Show World where
            ++ " o" ++ show (ro w)
            ++ " " ++ show (s w)
 
+worldDefault :: World
+worldDefault = World 44 22 0 0 0 4 " .,;+%#@"
+
 main = do
-    let w = World 44 22 0 0 0 4 " .,;+%#@"
+    let w = worldDefault
     hSetBuffering stdin NoBuffering
     hSetBuffering stdout NoBuffering
     hSetEcho stdout False
