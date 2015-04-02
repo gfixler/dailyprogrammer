@@ -59,18 +59,26 @@ loop mode a@(World w h x y i o s) = do
         'c' -> loop RadCen $ World w h x y i o s
         'i' -> loop RadIn $ World w h x y i o s
         'o' -> loop RadOut $ World w h x y i o s
-        'f' -> loop mode $ World (succ w) h x y i o s
-        'b' -> loop mode $ World (max 1 (pred w)) h x y i o s
-        'u' -> loop mode $ World w (max 1 (pred h)) x y i o s
-        'd' -> loop mode $ World w (succ h) x y i o s
-        'h' -> loop mode $ World w h (pred x) y i o s
-        'l' -> loop mode $ World w h (succ x) y i o s
-        'j' -> loop mode $ World w h x (succ y) i o s
-        'k' -> loop mode $ World w h x (pred y) i o s
-        ']' -> loop mode $ World w h x y (succ i) o s
-        '[' -> loop mode $ World w h x y (max 0 (pred i)) o s
-        '>' -> loop mode $ World w h x y i (succ o) s
-        '<' -> loop mode $ World w h x y i (max 0 (pred o)) s
+        'h' -> loop mode $ case mode of
+                          Window -> World (max 1 (pred w)) h x y i o s
+                          RadCen -> World w h (pred x) y i o s
+                          RadIn  -> World w h x y (max 0 (pred i)) o s
+                          RadOut -> World w h x y i (max 0 (pred o)) s
+        'j' -> loop mode $ case mode of
+                          Window -> World w (succ h) x y i o s
+                          RadCen -> World w h x (succ y) i o s
+                          RadIn  -> World w h x y (succ i) o s
+                          RadOut -> World w h x y i (succ o) s
+        'k' -> loop mode $ case mode of
+                          Window -> World w (max 1 (pred h)) x y i o s
+                          RadCen -> World w h x (pred y) i o s
+                          RadIn  -> World w h x y (max 0 (pred i)) o s
+                          RadOut -> World w h x y i (max 0 (pred o)) s
+        'l' -> loop mode $ case mode of
+                          Window -> World (succ w) h x y i o s
+                          RadCen -> World w h (succ x) y i o s
+                          RadIn  -> World w h x y (succ i) o s
+                          RadOut -> World w h x y i (succ o) s
         's' -> do
             putStr "string: "
             hSetEcho stdout True
