@@ -68,21 +68,21 @@ loop mode a@(World w h x y i o s) = do
                           Window -> World (max 1 (pred w)) h x y i o s
                           RadCen -> World w h (pred x) y i o s
                           RadIn  -> World w h x y (max 0 (pred i)) o s
-                          RadOut -> World w h x y i (max 0 (pred o)) s
+                          RadOut -> World w h x y i (max (succ i) (pred o)) s
         'j' -> loop mode $ case mode of
                           Window -> World w (succ h) x y i o s
                           RadCen -> World w h x (succ y) i o s
-                          RadIn  -> World w h x y (succ i) o s
+                          RadIn  -> World w h x y (min (pred o) (succ i)) o s
                           RadOut -> World w h x y i (succ o) s
         'k' -> loop mode $ case mode of
                           Window -> World w (max 1 (pred h)) x y i o s
                           RadCen -> World w h x (pred y) i o s
                           RadIn  -> World w h x y (max 0 (pred i)) o s
-                          RadOut -> World w h x y i (max 0 (pred o)) s
+                          RadOut -> World w h x y i (max (succ i) (pred o)) s
         'l' -> loop mode $ case mode of
                           Window -> World (succ w) h x y i o s
                           RadCen -> World w h (succ x) y i o s
-                          RadIn  -> World w h x y (succ i) o s
+                          RadIn  -> World w h x y (min (pred o) (succ i)) o s
                           RadOut -> World w h x y i (succ o) s
         's' -> do
             putStr "string: "
