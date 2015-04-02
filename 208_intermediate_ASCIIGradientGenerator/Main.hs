@@ -49,13 +49,12 @@ main = do
     loop Window worldDefault
 
 render mode a@(World w h x y i o s) = do
-    print a
-    print mode
     putStr $ unlines $ renderRadial s (fromIntegral w)
                                     (fromIntegral h)
                                     (fromIntegral x,fromIntegral y)
                                     (fromIntegral i)
                                     (fromIntegral o)
+    putStrLn $ show a ++ " " ++ show mode
 
 loop mode a@(World w h x y i o s) = do
     render mode a
