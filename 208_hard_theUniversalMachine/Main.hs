@@ -19,10 +19,10 @@ data TuringMachine a = TM { offset :: Int
                           , accept :: State
                           , state  :: State
                           , alpha  :: [a]
-                          , empty  :: a
-                          , init   :: Zipper a
+                          , non    :: a
+                          , tape   :: Zipper a
                           } deriving (Show)
 
 machine :: [State] -> State -> State -> [a] -> a -> [a] -> TuringMachine a
-machine states state stop alpha empty init = TM 0 states state stop alpha empty (fromList init)
+machine states state stop alpha non tape = TM 0 states state stop alpha non (fromList tape)
 
