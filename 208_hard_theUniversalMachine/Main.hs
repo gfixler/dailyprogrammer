@@ -39,6 +39,9 @@ type StateCell a = (State, a)
 data Direction = Left | Right
 type Transition a = (StateCell a, StateCell a, Direction)
 
+getStateCell :: TuringMachine a -> StateCell a
+getStateCell m = (state m, cursor (tape m))
+
 match :: Eq a => a -> State -> TuringMachine a -> Bool
 match x s m = s == state m && x == cursor (tape m)
 
