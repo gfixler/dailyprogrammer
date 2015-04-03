@@ -3,7 +3,6 @@ module Main () where
 import Data.List.Zipper ( Zipper(..), fromList
                         , left, right
                         , insert, push
-                        , start, end
                         , beginp, endp)
 
 insLeft :: a -> Zipper a -> Zipper a
