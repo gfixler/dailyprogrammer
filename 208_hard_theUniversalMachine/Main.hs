@@ -8,10 +8,17 @@ import Data.List.Zipper ( Zipper(..), fromList
 
 type State = String
 
-data TuringMachine a = TM Int [a] [State] State State (Zipper a) deriving (Show)
+data TuringMachine a = TM { offset :: Int
+                          , states :: [State]
+                          , accept :: State
+                          , state  :: State
+                          , alpha  :: [a]
+                          , empty  :: a
+                          , init   :: Zipper a
+                          } deriving (Show)
 
-machine :: [a] -> [State] -> State -> State -> [a] -> TuringMachine a
-machine alpha states start stop init = TM 0 alpha states start stop (fromList init)
+machine :: [State] -> State -> State -> [a] -> a -> [a] -> TuringMachine a
+machine states state stop alpha empty init = TM 0 states state stop alpha empty (fromList init)
 
 insLeft :: a -> Zipper a -> Zipper a
 insLeft x z = if beginp z then left . insert x $ z
