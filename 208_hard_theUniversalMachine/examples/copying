@@ -1,0 +1,22 @@
+01xy#
+C0 C1 Ret Search OK
+Search
+OK
+0110100#
+Search 0 = C0 x >
+Search 1 = C1 y >
+Search # = OK # >
+C0 0 = C0 0 >
+C0 1 = C0 1 >
+C0 # = C0 # >
+C0 _ = Ret 0 <
+C1 0 = C1 0 >
+C1 1 = C1 1 >
+C1 # = C1 # >
+C1 _ = Ret 1 <
+Ret 0 = Ret 0 <
+Ret 1 = Ret 1 <
+Ret # = Ret # <
+Ret x = Search 0 >
+Ret y = Search 1 >
+

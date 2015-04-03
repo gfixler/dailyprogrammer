@@ -1,0 +1,15 @@
+01
+Mov B Bi OK
+Mov
+OK
+01100100
+Mov 0 = Mov 0 >
+Mov 1 = Mov 1 >
+Mov _ = B _ <
+B 0 = B 0 <
+B 1 = Bi 1 <
+B _ = OK _ >
+Bi 0 = Bi 1 <
+Bi 1 = Bi 0 <
+Bi _ = OK _ >
+

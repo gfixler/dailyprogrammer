@@ -1,0 +1,22 @@
+./k
+Init Mdot MDash Ret OK
+Init
+OK
+/././../.../..../k
+Init _ = Init _ >
+Init . = Mdot _ >
+Init / = MDash _ >
+Init k = OK k >
+Mdot . = Mdot . >
+Mdot / = Mdot / >
+Mdot k = Mdot k >
+Mdot _ = Ret . <
+MDash . = MDash . >
+MDash / = MDash / >
+MDash k = MDash k >
+MDash _ = Ret / <
+Ret . = Ret . <
+Ret / = Ret / <
+Ret k = Ret k <
+Ret _ = Init _ >
+
