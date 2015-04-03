@@ -16,8 +16,8 @@ type State = String
 
 data TuringMachine a = TM { offset :: Int
                           , states :: [State]
-                          , accept :: State
                           , state  :: State
+                          , accept :: State
                           , alpha  :: [a]
                           , non    :: a
                           , tape   :: Zipper a
