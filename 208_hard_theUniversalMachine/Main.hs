@@ -26,3 +26,9 @@ data TuringMachine a = TM { offset :: Int
 machine :: [State] -> State -> State -> [a] -> a -> [a] -> TuringMachine a
 machine states state stop alpha non tape = TM 0 states state stop alpha non (fromList tape)
 
+stepL :: TuringMachine a -> TuringMachine a
+stepL m = m { tape = insLeft (non m) (tape m) }
+
+stepR :: TuringMachine a -> TuringMachine a
+stepR m = m { tape = pushRight (non m) (tape m) }
+
