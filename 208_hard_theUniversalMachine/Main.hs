@@ -1,6 +1,7 @@
 module Main () where
 
 import Data.List.Zipper ( Zipper(..), fromList
+                        , cursor
                         , left, right
                         , insert, push
                         , beginp, endp)
@@ -33,4 +34,7 @@ stepR m = m { tape = pushRight (non m) (tape m) }
 
 setState :: State -> TuringMachine a -> TuringMachine a
 setState s m = m { state = s }
+
+match :: Eq a => a -> State -> TuringMachine a -> Bool
+match x s m = s == state m && x == cursor (tape m)
 
