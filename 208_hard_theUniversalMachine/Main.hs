@@ -42,6 +42,9 @@ type Transition a = (StateCell a, StateCell a, Direction)
 getStateCell :: TuringMachine a -> StateCell a
 getStateCell m = (state m, cursor (tape m))
 
+setStateCell :: StateCell a -> TuringMachine a -> TuringMachine a
+setStateCell (s, x) m = m { tape = replace x (tape m), state = s }
+
 match :: Eq a => a -> State -> TuringMachine a -> Bool
 match x s m = s == state m && x == cursor (tape m)
 
