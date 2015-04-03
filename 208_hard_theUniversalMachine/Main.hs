@@ -6,6 +6,12 @@ import Data.List.Zipper ( Zipper(..), fromList
                         , start, end
                         , beginp, endp)
 
+insLeft :: a -> Zipper a -> Zipper a
+insLeft x z = if beginp z then left . insert x $ z else left z
+
+pushRight :: a -> Zipper a -> Zipper a
+pushRight x z = if endp z then right . push x $ z else right z
+
 type State = String
 
 data TuringMachine a = TM { offset :: Int
@@ -19,12 +25,4 @@ data TuringMachine a = TM { offset :: Int
 
 machine :: [State] -> State -> State -> [a] -> a -> [a] -> TuringMachine a
 machine states state stop alpha empty init = TM 0 states state stop alpha empty (fromList init)
-
-insLeft :: a -> Zipper a -> Zipper a
-insLeft x z = if beginp z then left . insert x $ z
-                          else left z
-
-pushRight :: a -> Zipper a -> Zipper a
-pushRight x z = if endp z then right . push x $ z
-                          else right z
 
