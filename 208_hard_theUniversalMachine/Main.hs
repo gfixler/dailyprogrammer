@@ -13,6 +13,9 @@ pushRight :: a -> Zipper a -> Zipper a
 pushRight x z = if endp z then right . push x $ z else right z
 
 type State = String
+type StateCell a = (State, a)
+data Direction = Left | Right deriving (Show)
+type Transition a = (StateCell a, StateCell a, Direction)
 
 data TuringMachine a = TM { offset :: Int
                           , states :: [State]
@@ -34,10 +37,6 @@ stepR m = m { tape = pushRight (non m) (tape m) }
 
 setState :: State -> TuringMachine a -> TuringMachine a
 setState s m = m { state = s }
-
-type StateCell a = (State, a)
-data Direction = Left | Right
-type Transition a = (StateCell a, StateCell a, Direction)
 
 getStateCell :: TuringMachine a -> StateCell a
 getStateCell m = (state m, cursor (tape m))
