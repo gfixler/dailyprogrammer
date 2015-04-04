@@ -14,7 +14,7 @@ pushRight x z = if endp z then right . push x $ z else right z
 
 type State = String
 type StateCell a = (State, a)
-data Direction = Left | Right deriving (Show)
+data Direction = L | R deriving (Show)
 type Transition a = (StateCell a, StateCell a, Direction)
 
 data TuringMachine a = TM { offset :: Int
