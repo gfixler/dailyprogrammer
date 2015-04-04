@@ -27,13 +27,13 @@ data TuringMachine a = TM { offset :: Int
                           , states :: [State]
                           , state  :: State
                           , accept :: State
-                          , trans  :: [Transition a]
+                          , trans  :: [Either String (Transition a)]
                           , alpha  :: [a]
                           , non    :: a
                           , tape   :: Zipper a
                           } deriving (Show)
 
-machine :: [State] -> State -> State -> [Transition a] -> [a] -> a -> [a] -> TuringMachine a
+machine :: [State] -> State -> State -> [Either String (Transition a)] -> [a] -> a -> [a] -> TuringMachine a
 machine states state stop trans alpha non tape = TM 0 states state stop trans alpha non (fromList tape)
 
 stepL :: TuringMachine a -> TuringMachine a
