@@ -36,9 +36,6 @@ stepL m = m { tape = insLeft (non m) (tape m) }
 stepR :: TuringMachine a -> TuringMachine a
 stepR m = m { tape = pushRight (non m) (tape m) }
 
-setState :: State -> TuringMachine a -> TuringMachine a
-setState s m = m { state = s }
-
 getStateCell :: TuringMachine a -> StateCell a
 getStateCell m = (state m, cursor (tape m))
 
