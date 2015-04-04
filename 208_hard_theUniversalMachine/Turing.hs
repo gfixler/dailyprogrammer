@@ -1,6 +1,7 @@
 module Turing ( insLeft, pushRight
-              , Direction, Transition
-              , machine, stepL, stepR
+              , Direction(L,R), Transition
+              , TuringMachine, machine
+              , stepL, stepR
               , getStateCell, setStateCell
               , match, transition
               ) where
