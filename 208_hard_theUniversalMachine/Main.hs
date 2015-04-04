@@ -45,3 +45,8 @@ setStateCell (s, x) m = m { tape = replace x (tape m), state = s }
 match :: Eq a => StateCell a -> TuringMachine a -> Bool
 match (s, x) m = s == state m && x == cursor (tape m)
 
+transition :: Eq a => Transition a -> TuringMachine a -> TuringMachine a
+transition (s,s',d) m = if match s m then step $ setStateCell s' m else m
+    where step = case d of L -> stepL
+                           R -> stepR
+
