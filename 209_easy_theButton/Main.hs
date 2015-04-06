@@ -10,6 +10,9 @@ getFlairs xs = r 0 (sortBy (comparing snd) xs)
 parseTime :: String -> (String, Double)
 parseTime x = let (u,t) = break (== ' ') x in (u, read t)
 
+formatFlair :: (String, Integer) -> String
+formatFlair (u,t) = u ++ " " ++ show t
+
 readUserTime :: IO (String, Double)
 readUserTime = do
     l <- getLine
