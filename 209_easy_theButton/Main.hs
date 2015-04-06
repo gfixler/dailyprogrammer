@@ -19,6 +19,6 @@ formatUserTime (u,t) = u ++ ": " ++ show t
 
 main = do
     n <- readLn :: IO Int
-    usertimes <- replicateM n readUserTime
-    print $ getFlairs usertimes
+    userTimes <- replicateM n readUserTime
+    putStr . ("\n" ++) . unlines . map formatUserTime $ getFlairs userTimes
 
