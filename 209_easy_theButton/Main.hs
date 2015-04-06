@@ -14,6 +14,9 @@ readUserTime = do
         time = reverse . takeWhile (/= ' ') $ reverse l
     return (user, read time :: Double)
 
+formatUserTime :: (String, Integer) -> String
+formatUserTime (u,t) = u ++ ": " ++ show t
+
 main = do
     n <- readLn :: IO Int
     usertimes <- replicateM n readUserTime
