@@ -13,16 +13,6 @@ parseTime x = let (u,t) = break (== ' ') x in (u, read t)
 formatFlair :: (String, Integer) -> String
 formatFlair (u,t) = u ++ " " ++ show t
 
-readUserTime :: IO (String, Double)
-readUserTime = do
-    l <- getLine
-    let user = takeWhile (/= ':') l
-        time = reverse . takeWhile (/= ' ') $ reverse l
-    return (user, read time :: Double)
-
-formatUserTime :: (String, Integer) -> String
-formatUserTime (u,t) = u ++ ": " ++ show t
-
 main = do
     n <- readLn :: IO Int
     lines <- replicateM n getLine
