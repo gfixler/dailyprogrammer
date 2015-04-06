@@ -1,4 +1,4 @@
-import Control.Monad (forM)
+import Control.Monad (replicateM)
 import Data.List (sortBy)
 import Data.Ord (comparing)
 
@@ -15,8 +15,7 @@ readUserTime = do
     return (user, read time :: Double)
 
 main = do
-    n <- getLine
-    let n' = read n :: Int
-    lines <- forM [1..n'] (\x -> getLine)
-    print lines
+    n <- readLn :: IO Int
+    usertimes <- replicateM n readUserTime
+    print $ getFlairs usertimes
 
