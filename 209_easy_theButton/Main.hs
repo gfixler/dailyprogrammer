@@ -7,6 +7,9 @@ getFlairs xs = r 0 (sortBy (comparing snd) xs)
     where r _ [] = []
           r p ((u,t):xs) = (u,floor $ 60-(t-p)) : r t xs
 
+parseTime :: String -> (String, Double)
+parseTime x = let (u,t) = break (== ' ') x in (u, read t)
+
 readUserTime :: IO (String, Double)
 readUserTime = do
     l <- getLine
