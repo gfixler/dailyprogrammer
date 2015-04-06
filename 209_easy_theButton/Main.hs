@@ -25,6 +25,7 @@ formatUserTime (u,t) = u ++ ": " ++ show t
 
 main = do
     n <- readLn :: IO Int
-    userTimes <- replicateM n readUserTime
-    putStr . ("\n" ++) . unlines . map formatUserTime $ getFlairs userTimes
+    lines <- replicateM n getLine
+    let flairs = getFlairs $ map parseTime lines
+    putStr . ("\n" ++) . unlines . map formatFlair $ flairs
 
