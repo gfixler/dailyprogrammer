@@ -7,6 +7,13 @@ getFlairs xs = r 0 (sortBy (comparing snd) xs)
     where r _ [] = []
           r p ((u,t):xs) = (u,floor $ 60-(t-p)) : r t xs
 
+readUserTime :: IO (String, Double)
+readUserTime = do
+    l <- getLine
+    let user = takeWhile (/= ':') l
+        time = reverse . takeWhile (/= ' ') $ reverse l
+    return (user, read time :: Double)
+
 main = do
     n <- getLine
     let n' = read n :: Int
