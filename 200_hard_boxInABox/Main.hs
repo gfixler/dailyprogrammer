@@ -12,12 +12,15 @@ readLines = do
 readInts :: String -> [Int]
 readInts = map read . words
 
+readXYZ :: String -> (Int,Int,Int)
+readXYZ s = let (x:y:z:[]) = readInts s in (x,y,z)
+
 main = do
     s <- getLine
     getLine
     ls <- readLines
-    let s' = readInts s
-        ls' = map readInts ls
+    let s' = readXYZ s
+        ls' = map readXYZ ls
     print s'
     print ls'
 
