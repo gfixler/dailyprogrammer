@@ -8,3 +8,7 @@ choose xs = do
 data Corner    = TL | TR | BL | BR deriving (Eq, Show)
 data Expansion = H | V deriving (Eq, Show)
 
+data ExBox = ExBox (Int, Int) (Int, Int) Corner [(Int, Int)] deriving (Show)
+
+exBox corner = ExBox (1,1) (0,0) corner [(0,0)]
+
