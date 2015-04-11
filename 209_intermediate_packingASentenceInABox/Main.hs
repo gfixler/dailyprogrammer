@@ -1,3 +1,7 @@
+import Data.List
+import Data.List.Split
+import Data.Ord
+import Data.Tuple
 import System.Random (getStdRandom, randomR)
 
 choose :: [a] -> IO a
@@ -23,4 +27,8 @@ expandPack e (ExBox (l,t,r,b) c ps) =
         (V, BL) -> ExBox (l,t,r,b+1) BR (ps ++ zip [l..r] (repeat (b+1)))
         (H, BR) -> ExBox (l,t,r+1,b) TR (ps ++ zip (repeat (r+1)) (reverse [t..b]))
         (V, BR) -> ExBox (l,t,r,b+1) BL (ps ++ zip (reverse [l..r]) (repeat (b+1)))
+
+showExBox :: ExBox -> String -> String
+showExBox (ExBox (l,_,r,_) _ xs) s =
+    unlines . chunksOf (r-l+1) . map snd . sortBy (comparing (swap . fst)) $ zip xs s
 
