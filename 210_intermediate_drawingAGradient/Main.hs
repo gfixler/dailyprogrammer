@@ -1,3 +1,7 @@
+intSteps :: Int -> Int -> Int -> [Int]
+intSteps s e n = map (round . remap) [0..n-1]
+    where remap x = fromIntegral s + fromIntegral x * (fromIntegral e - fromIntegral s) / fromIntegral (n-1)
+
 toPixmap :: [[(Int,Int,Int)]] -> String
 toPixmap xss = header ++ image xss
     where header = "P3\n" ++ show width ++ " " ++ show (length xss) ++ " 255\n"
