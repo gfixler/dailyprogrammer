@@ -11,6 +11,11 @@ toPixmap xss = header ++ image xss
           line = unwords . map pixel
           image = unwords . map line
 
+hgrad3 :: (Int,Int,Int) -> (Int,Int,Int) -> Int -> [(Int,Int,Int)]
+hgrad3 (a,b,c) (d,e,f) n = zip3 (intSteps a d n)
+                                (intSteps b e n)
+                                (intSteps c f n)
+
 spacedInts :: String -> [Int]
 spacedInts = map read . words
 
