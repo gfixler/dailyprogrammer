@@ -23,5 +23,5 @@ main = do
     [w,h] <- fmap spacedInts $ getLine
     [ar,ag,ab] <- fmap spacedInts $ getLine
     [br,bg,bb] <- fmap spacedInts $ getLine
-    putStrLn "done"
+    putStr . toPixmap $ replicate h (hgrad3 (ar,ag,ab) (br,bg,bb) w)
 
