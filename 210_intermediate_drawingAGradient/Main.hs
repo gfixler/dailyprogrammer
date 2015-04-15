@@ -9,7 +9,7 @@ toPixmap xss = header ++ image xss
           width = minimum $ map length xss
           pixel (a,b,c) = unwords $ map show [a,b,c]
           line = unwords . map pixel
-          image = unwords . map line
+          image = unlines . map line
 
 hgrad3 :: (Int,Int,Int) -> (Int,Int,Int) -> Int -> [(Int,Int,Int)]
 hgrad3 (a,b,c) (d,e,f) n = zip3 (intSteps a d n)
