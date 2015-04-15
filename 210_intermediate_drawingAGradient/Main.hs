@@ -1,6 +1,7 @@
 intSteps :: Int -> Int -> Int -> [Int]
 intSteps s e n = map (round . remap) [0..n-1]
-    where remap x = fromIntegral s + fromIntegral x * (fromIntegral e - fromIntegral s) / fromIntegral (n-1)
+    where fi = fromIntegral -- longest function name ever
+          remap x = fi s + fi x * (fi e - fi s) / fi (n-1)
 
 toPixmap :: [[(Int,Int,Int)]] -> String
 toPixmap xss = header ++ image xss
