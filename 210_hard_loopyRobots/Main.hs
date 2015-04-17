@@ -1,6 +1,8 @@
 data Facing = N | S | E | W      deriving (Show)
 data Bot    = Bot Int Int Facing deriving (Show)
 
+bot = Bot 0 0 N
+
 step :: Bot -> Char -> Bot
 step (Bot x y d) c = Bot x' y' d'
     where (x',y',d') = case (d,c) of
