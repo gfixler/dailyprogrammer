@@ -3,13 +3,10 @@ data Tree a b = Branch a (Tree a b) (Tree a b)
               | Leaf b
               deriving (Show)
 
-data TreeZipper a b = Top (Tree a b)
-                    | L (Tree a b) a (Tree a b)
-                    | R (Tree a b) a (Tree a b)
-                    | Bottom (Tree a b) a (Tree a b)
-                    deriving (Show)
+data Side = T | L | R deriving (Show)
+type Crumb a b = (a, Side, Tree a b)
+type TreeZipper a b = (Tree a b, Side, [Crumb a b])
 
 zipperTree :: Tree a b -> TreeZipper a b
-zipperTree = Top
-
+zipperTree t = (t, T, [])
 
