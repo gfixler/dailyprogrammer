@@ -1,2 +1,6 @@
-data Tree a b = E | B a (Tree a b) (Tree a b) | T b deriving (Show)
+data Tree a b = Branch a (Tree a b) (Tree a b)
+              | Tip
+              | Leaf b
+              deriving (Show)
+
 
