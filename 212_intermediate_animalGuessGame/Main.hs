@@ -9,4 +9,7 @@ data TreeZipper a b = Top (Tree a b)
                     | Bottom (Tree a b) a (Tree a b)
                     deriving (Show)
 
+zipperTree :: Tree a b -> TreeZipper a b
+zipperTree = Top
+
 
