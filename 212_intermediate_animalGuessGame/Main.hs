@@ -23,3 +23,7 @@ goUp (l, L, ((x,s,r):cs)) = Just (Branch x l r,s,cs)
 goUp (r, R, ((x,s,l):cs)) = Just (Branch x l r,s,cs)
 goUp _ = Nothing
 
+toTop :: TreeZipper a b -> Maybe (TreeZipper a b)
+toTop t = case goUp t of Nothing -> Just t
+                         Just x -> toTop x
+
