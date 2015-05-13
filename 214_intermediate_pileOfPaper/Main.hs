@@ -14,3 +14,8 @@ pileOn :: Sheet -> Pile -> Pile
 pileOn s@(c,x,y,w,h) (l,t,r,b,p) =
         (min x l, min y t, max (x+w) r, max (y+h) b, s:p)
 
+colorAt :: Int -> Int -> Pile -> Int
+colorAt x y (l,t,r,b,s) = f s
+    where f [] = 0
+          f (s:ss) = if onSheet s x y then sheetCol s else f ss
+
