@@ -16,6 +16,12 @@ pileOn :: Sheet -> Pile -> Pile
 pileOn s@(c,x,y,w,h) (l,t,r,b,p) =
         (min x l, min y t, max (x+w) r, max (y+h) b, s:p)
 
+pileSheets :: Pile -> [Sheet]
+pileSheets (_,_,_,_,s) = s
+
+pileWidth :: Pile -> Int
+pileWidth (l,_,r,_,_) = r-l
+
 colorAt :: Int -> Int -> Pile -> Int
 colorAt x y (l,t,r,b,s) = f s
     where f [] = 0
