@@ -1,3 +1,5 @@
+import Data.List.Split (chunksOf)
+
 type Sheet  = (Int, Int, Int, Int, Int) -- color, x, y, w, h
 type Pile   = (Int, Int, Int, Int, [Sheet]) -- l, t, r, b, sheets
 
@@ -18,4 +20,8 @@ colorAt :: Int -> Int -> Pile -> Int
 colorAt x y (l,t,r,b,s) = f s
     where f [] = 0
           f (s:ss) = if onSheet s x y then sheetCol s else f ss
+
+strPile :: Pile -> String
+strPile p@(l,t,r,b,s) = unlines . map concat . chunksOf (r-l) $ cs
+    where cs = map show [colorAt x y p | y <- [t..b-1], x <- [l..r-1]]
 
