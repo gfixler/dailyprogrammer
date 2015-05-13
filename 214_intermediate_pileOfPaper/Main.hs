@@ -1,4 +1,5 @@
 import Data.List.Split (chunksOf)
+import Data.Map (Map, fromList, insertWith')
 
 type Sheet  = (Int, Int, Int, Int, Int) -- color, x, y, w, h
 type Pile   = (Int, Int, Int, Int, [Sheet]) -- l, t, r, b, sheets
@@ -33,4 +34,7 @@ pileCols p@(l,t,r,b,s) = [colorAt x y p | y <- [t..b-1], x <- [l..r-1]]
 strPile :: Pile -> String
 strPile p = unlines . map concat . chunksOf (pileWidth p) $ cs
     where cs = map show $ pileCols p
+
+colCounts :: Pile -> Map Int Int
+colCounts p = foldr (\c -> insertWith' (+) c 1) (fromList []) (pileCols p)
 
