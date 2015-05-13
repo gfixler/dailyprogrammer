@@ -31,6 +31,6 @@ pileCols :: Pile -> [Int]
 pileCols p@(l,t,r,b,s) = [colorAt x y p | y <- [t..b-1], x <- [l..r-1]]
 
 strPile :: Pile -> String
-strPile p@(l,t,r,b,s) = unlines . map concat . chunksOf (r-l) $ cs
-    where cs = map show [colorAt x y p | y <- [t..b-1], x <- [l..r-1]]
+strPile p = unlines . map concat . chunksOf (pileWidth p) $ cs
+    where cs = map show $ pileCols p
 
