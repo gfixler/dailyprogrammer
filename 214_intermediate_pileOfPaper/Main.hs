@@ -27,6 +27,9 @@ colorAt x y (l,t,r,b,s) = f s
     where f [] = 0
           f (s:ss) = if onSheet s x y then sheetCol s else f ss
 
+pileCols :: Pile -> [Int]
+pileCols p@(l,t,r,b,s) = [colorAt x y p | y <- [t..b-1], x <- [l..r-1]]
+
 strPile :: Pile -> String
 strPile p@(l,t,r,b,s) = unlines . map concat . chunksOf (r-l) $ cs
     where cs = map show [colorAt x y p | y <- [t..b-1], x <- [l..r-1]]
