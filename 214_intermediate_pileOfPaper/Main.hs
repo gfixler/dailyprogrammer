@@ -1,6 +1,9 @@
 type Sheet  = (Int, Int, Int, Int, Int) -- color, x, y, w, h
 type Pile   = (Int, Int, Int, Int, [Sheet]) -- l, t, r, b, sheets
 
+sheetCol :: Sheet -> Int
+sheetCol (c,_,_,_,_) = c
+
 onSheet :: Sheet -> Int -> Int -> Bool
 onSheet (_,l,t,w,h) x y = x >= l && y >= t && x <= l+w-1 && y <= t+h-1
 
