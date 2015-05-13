@@ -38,3 +38,6 @@ strPile p = unlines . map concat . chunksOf (pileWidth p) $ cs
 colCounts :: Pile -> Map Int Int
 colCounts p = foldr (\c -> insertWith' (+) c 1) (fromList []) (pileCols p)
 
+readSpacedNums :: String -> [Int]
+readSpacedNums = map read . words
+
