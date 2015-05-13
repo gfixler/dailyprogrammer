@@ -1,5 +1,6 @@
 import Data.List.Split (chunksOf)
 import Data.Map (Map, fromList, insertWith')
+import System.IO (getContents)
 
 type Sheet  = (Int, Int, Int, Int, Int) -- color, x, y, w, h
 type Pile   = (Int, Int, Int, Int, [Sheet]) -- l, t, r, b, sheets
@@ -40,4 +41,11 @@ colCounts p = foldr (\c -> insertWith' (+) c 1) (fromList []) (pileCols p)
 
 readSpacedNums :: String -> [Int]
 readSpacedNums = map read . words
+
+main = do
+    cs <- fmap lines getContents
+    let [w,h] = readSpacedNums $ head cs
+        ss    = map readSpacedNums $ tail cs
+    let pile = foldl (\p [c,x,y,w,h] -> pileOn (c,x,y,w,h) p) (newPile w h) ss
+    return $ colCounts pile
 
