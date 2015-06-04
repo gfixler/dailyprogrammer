@@ -7,8 +7,8 @@ readLinesOfInts = concat . map (map read . words) . lines
 main :: IO ()
 main = do
     (d:n:ps) <- fmap readLinesOfInts getContents
-    print d
-    print n
-    print ps
+    let xys = [(x,y) | y <- [0..d], x <- [0..d]]
+        ps' = zip ps xys
+    print ps'
     return ()
 
