@@ -21,10 +21,9 @@ pileup z | (endp . right) z              = start (zsucc z)
 main :: IO ()
 main = do
     (d:n:ps) <- fmap readLinesOfInts getContents
-    let ps'    = toList $ (!! n) $ iterate pileup $ fromList (sort ps)
-        xys    = [(x,y) | y <- [0..d], x <- [0..d]]
-        coords = map snd $ sortBy (comparing fst) (zip ps xys)
-        piles  = map fst $ sortBy (comparing snd) (zip ps' coords)
-    mapM_ print (chunksOf d piles)
+    let ps'  = toList $ (!! n) $ iterate pileup $ fromList (sort ps)
+        idxs = map snd $ sortBy (comparing fst) (zip ps [0..])
+        ps'' = map fst $ sortBy (comparing snd) (zip ps' idxs)
+    mapM_ print (chunksOf d ps'')
     return ()
 
