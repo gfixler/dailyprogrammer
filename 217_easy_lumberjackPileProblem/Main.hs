@@ -6,6 +6,9 @@ import System.IO (getContents)
 readLinesOfInts :: String -> [Int]
 readLinesOfInts = concat . map (map read . words) . lines
 
+zsucc :: Enum a => Zipper a -> Zipper a
+zsucc z = replace (succ $ cursor z) z
+
 -- example usage: cat input | runhaskell Main.hs
 main :: IO ()
 main = do
