@@ -1,4 +1,5 @@
 import Data.List (sort, sortBy)
+import Data.List.Split (chunksOf)
 import Data.List.Zipper ( Zipper(Zip), fromList, toList
                         , cursor, replace, endp
                         , start, left, right)
@@ -21,6 +22,9 @@ main :: IO ()
 main = do
     (d:n:ps) <- fmap readLinesOfInts getContents
     let ps'    = toList $ (!! n) $ iterate pileup $ fromList (sort ps)
-    print ps'
+        xys    = [(x,y) | y <- [0..d], x <- [0..d]]
+        coords = map snd $ sortBy (comparing fst) (zip ps xys)
+        piles  = map fst $ sortBy (comparing snd) (zip ps' coords)
+    mapM_ print (chunksOf d piles)
     return ()
 
