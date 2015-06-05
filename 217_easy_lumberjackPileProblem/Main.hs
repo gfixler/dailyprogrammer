@@ -1,4 +1,4 @@
-import Data.List (sortBy)
+import Data.List (sort, sortBy)
 import Data.List.Zipper ( Zipper(Zip), fromList, toList
                         , cursor, replace, endp
                         , start, left, right)
@@ -20,8 +20,7 @@ pileup z | (endp . right) z              = start (zsucc z)
 main :: IO ()
 main = do
     (d:n:ps) <- fmap readLinesOfInts getContents
-    let xys = [(x,y) | y <- [0..d], x <- [0..d]]
-        ps' = fromList $ sortBy (comparing fst) (zip ps xys)
+    let ps'    = toList $ (!! n) $ iterate pileup $ fromList (sort ps)
     print ps'
     return ()
 
