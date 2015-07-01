@@ -1,5 +1,7 @@
 import qualified Data.Map as M
 
+type SnakeMap = M.Map (Int,Int) Char
+
 enum :: [a] -> [(Int,a)]
 enum = zip [0..]
 
