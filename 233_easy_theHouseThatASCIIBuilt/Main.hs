@@ -5,14 +5,14 @@ type Grid a = M.Map (Int, Int) a
 enum :: [a] -> [(Int, a)]
 enum = zip [0..]
 
-numLines :: String -> [(Int, String)]
-numLines = reverse . enum . reverse . lines
+toYLines :: String -> [(Int, String)]
+toYLines = reverse . enum . reverse . lines
 
-numLineChars :: (Int, String) -> [((Int, Int), Char)]
-numLineChars (y, s) = map (\(x,c) -> ((x,y),c)) (enum s)
+yLineToXChars :: (Int, String) -> [((Int, Int), Char)]
+yLineToXChars (y, s) = map (\(x,c) -> ((x,y),c)) (enum s)
 
 charGrid :: String -> [((Int, Int), Char)]
-charGrid = concatMap numLineChars . numLines
+charGrid = concatMap yLineToXChars . toYLines
 
 charGridBounds :: Grid Char -> ((Int, Int), (Int, Int))
 charGridBounds = foldr f e . M.keys
