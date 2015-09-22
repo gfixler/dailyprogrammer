@@ -23,6 +23,7 @@ gridBounds = foldr f e . M.keys
 gridPtOr :: a -> Coord -> Grid a -> a
 gridPtOr = M.findWithDefault
 
+renderCharPad :: Grid Char -> String
 renderCharPad p = unlines [[gridPtOr ' ' (x, y) p | y <- [yl .. yh]] | x <- [xl .. xh]]
     where ((xl, yl), (xh, yh)) = gridBounds p
 
