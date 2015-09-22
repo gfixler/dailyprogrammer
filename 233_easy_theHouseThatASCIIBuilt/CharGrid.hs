@@ -21,7 +21,7 @@ toCharGrid = M.fromList . concatMap yLineToXChars . toYLines
 
 -- assemble bbox-sized, "2D" string from Grid of Chars
 renderCharGrid :: Grid Char -> String
-renderCharGrid p = unlines [[gridPtOr ' ' (x, y) p | y <- [yl .. yh]] | x <- [xl .. xh]]
+renderCharGrid p = unlines [[gridPtOr ' ' (x, y) p | x <- [xl .. xh]] | y <- [yl .. yh]]
     where ((xl, yl), (xh, yh)) = gridBounds p
 
 
