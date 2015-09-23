@@ -35,8 +35,20 @@ horizontal n = replicate 3 (face n)
 interleave :: [[a]] -> [a]
 interleave = concat . transpose
 
+walls :: [Int] -> [String]
+walls xs = concat (interleave [joins, walls])
+    where joins = map (\x -> [vertical x]) (heightPairs xs)
+          walls = map horizontal xs
+
 roof :: Int -> [String]
 roof w = last $ take w $ iterate ((["/"]++) . (++["\\"]) . (map (' ':))) ["A"]
+
+roofs :: [Int] -> [String]
+roofs xs = [" "] ++ (intercalate [""] $ map (roof . (*2) . length) (group xs)) ++ [" "]
+
+building :: String -> String
+building s = upright $ zipWith (++) (walls hs) (roofs hs)
+    where hs = heights s
 
 pad :: Int -> String -> String
 pad i s = s ++ replicate (i - length s) ' '
@@ -47,15 +59,6 @@ padBox xs = map (pad z) xs
 
 upright :: [String] -> String
 upright = unlines . reverse . transpose . padBox
-
-build :: String -> String
-build s = upright $ zipWith (++) zs rs
-    where
-        hs = heights s
-        vs = map (\x -> [vertical x]) (heightPairs hs)
-        ws = map horizontal hs
-        zs = concat $ interleave [vs, ws]
-        rs = [" "] ++ (intercalate [""] $ map (roof . (*2) . length) (group hs)) ++ [" "]
 
 input1 = "   *\n  ***\n******"
 input2 = " *\n***\n***\n***\n***\n***\n***"
