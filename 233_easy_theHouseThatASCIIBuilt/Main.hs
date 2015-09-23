@@ -40,6 +40,9 @@ vertical (l, r) | l == r    = face l
 horizontal :: Int -> [String]
 horizontal n = replicate 3 (face n)
 
+interleave :: [[a]] -> [a]
+interleave = concat . transpose
+
 pad :: Int -> String -> String
 pad i s = s ++ replicate (i - length s) ' '
 
