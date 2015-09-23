@@ -18,6 +18,15 @@ heightPairs :: [Int] -> [(Int, Int)]
 heightPairs xs = zip hs (tail hs)
     where hs = 0 : xs ++ [0]
 
+vert :: Char -> Int -> String
+vert c i = replicate (i*2-1) c
+
+side :: Int -> String
+side i = '+' : vert '|' i ++ "+"
+
+face :: Int -> String
+face i = '-' : vert ' ' i ++ "-"
+
 input1 = "   *\n  ***\n******"
 input2 = " *\n***\n***\n***\n***\n***\n***"
 challenge1 = "    **\n*** **\n******"
