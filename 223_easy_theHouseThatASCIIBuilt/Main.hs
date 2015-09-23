@@ -25,9 +25,9 @@ rise (l, r) = lower ++ upper
 
 vertical :: (Int, Int) -> String
 vertical (l, r) | l == r    = face l
-             | l == 0    = side r
-             | r == 0    = side l
-             | otherwise = rise (l, r)
+                | l == 0    = side r
+                | r == 0    = side l
+                | otherwise = rise (l, r)
 
 horizontal :: Int -> [String]
 horizontal n = replicate 3 (face n)
