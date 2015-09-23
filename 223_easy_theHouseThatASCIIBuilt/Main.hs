@@ -2,12 +2,10 @@ module Main where
 
 import Data.List (transpose)
 
-type HeightPair = (Int, Int)
-
 heights :: String -> [Int]
 heights = map length . map (takeWhile (=='*')) . map reverse . transpose . lines
 
-heightPairs :: [Int] -> [HeightPair]
+heightPairs :: [Int] -> [(Int, Int)]
 heightPairs xs = zip hs (tail hs)
     where hs = 0 : xs ++ [0]
 
@@ -25,7 +23,7 @@ rise (l, r) = lower ++ upper
     where lower = '-' : vert ' ' (min l r) ++ "+"
           upper = vert '|' (abs (l-r)) ++ "+"
 
-vertical :: HeightPair -> String
+vertical :: (Int, Int) -> String
 vertical (l, r) | l == r    = face l
              | l == 0    = side r
              | r == 0    = side l
