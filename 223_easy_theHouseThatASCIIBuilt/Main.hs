@@ -1,6 +1,7 @@
 module Main where
 
 import Data.List (group, transpose, intercalate)
+import System.IO (getContents)
 
 -- utility function to join lists together in a particular way
 interleave :: [[a]] -> [a]
@@ -82,4 +83,6 @@ input1 = "   *\n  ***\n******"
 input2 = " *\n***\n***\n***\n***\n***\n***"
 challenge1 = "    **\n*** **\n******"
 challenge2 = "***                    ***\n***     **  ***  **    ***\n***   ***************  ***\n***   ***************  ***\n***   ***************  ***\n**************************\n**************************"
+
+main = getContents >>= putStrLn . building
 
