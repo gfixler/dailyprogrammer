@@ -2,6 +2,8 @@ module Main where
 
 import Data.List (transpose)
 
+type HeightPair = (Int, Int)
+
 sumHeights :: Num a => [a] -> [a] -> [a]
 sumHeights xs [] = xs
 sumHeights [] ys = ys
@@ -14,7 +16,7 @@ height _   = 1
 heights :: String -> [Int]
 heights = foldr1 sumHeights . map (map height) . lines
 
-heightPairs :: [Int] -> [(Int, Int)]
+heightPairs :: [Int] -> [HeightPair]
 heightPairs xs = zip hs (tail hs)
     where hs = 0 : xs ++ [0]
 
@@ -33,7 +35,7 @@ lower i = '-' : vert ' ' i ++ "+"
 upper :: Int -> String
 upper i = vert '|' i ++ "+"
 
-joint :: (Int, Int) -> String
+joint :: HeightPair -> String
 joint (0, r) = side r
 joint (l, 0) = side l
 joint (l, r) | l == r = face l
