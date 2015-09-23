@@ -33,6 +33,13 @@ joint (l, 0) = side l
 joint (l, r) | l == r = face l
              | otherwise = face (min l r) ++ vert '|' (abs (l-r)) ++ "+"
 
+pad :: Int -> String -> String
+pad i s = s ++ replicate (i - length s) ' '
+
+padBox :: [String] -> [String]
+padBox xs = map (pad z) xs
+    where z = maximum (map length xs)
+
 input1 = "   *\n  ***\n******"
 input2 = " *\n***\n***\n***\n***\n***\n***"
 challenge1 = "    **\n*** **\n******"
