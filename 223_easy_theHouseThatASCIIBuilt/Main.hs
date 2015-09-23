@@ -27,11 +27,17 @@ side i = '+' : vert '|' i ++ "+"
 face :: Int -> String
 face i = '-' : vert ' ' i ++ "-"
 
+lower :: Int -> String
+lower i = '-' : vert ' ' i ++ "+"
+
+upper :: Int -> String
+upper i = vert '|' i ++ "+"
+
 joint :: (Int, Int) -> String
 joint (0, r) = side r
 joint (l, 0) = side l
 joint (l, r) | l == r = face l
-             | otherwise = face (min l r) ++ vert '|' (abs (l-r)) ++ "+"
+             | otherwise = lower (min l r) ++ upper (abs (l-r))
 
 pad :: Int -> String -> String
 pad i s = s ++ replicate (i - length s) ' '
