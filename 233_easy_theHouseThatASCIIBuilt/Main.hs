@@ -45,6 +45,9 @@ inflate s = js
     where ps = heightPairs (heights s)
           js = map joint ps
 
+upright :: [String] -> String
+upright = unlines . reverse . transpose . padBox
+
 input1 = "   *\n  ***\n******"
 input2 = " *\n***\n***\n***\n***\n***\n***"
 challenge1 = "    **\n*** **\n******"
