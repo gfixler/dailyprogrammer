@@ -37,6 +37,9 @@ vertical (l, r) | l == r    = face l
              | r == 0    = side l
              | otherwise = rise (l, r)
 
+horizontal :: Int -> [String]
+horizontal n = replicate 3 (face n)
+
 pad :: Int -> String -> String
 pad i s = s ++ replicate (i - length s) ' '
 
