@@ -26,16 +26,16 @@ side i = '+' : vert '|' i ++ "+"
 face :: Int -> String
 face i = '-' : vert ' ' i ++ "-"
 
-step :: (Int, Int) -> String
-step (l, r) = lower ++ upper
+rise :: (Int, Int) -> String
+rise (l, r) = lower ++ upper
     where lower = '-' : vert ' ' (min l r) ++ "+"
           upper = vert '|' (abs (l-r)) ++ "+"
 
-joint :: HeightPair -> String
-joint (l, r) | l == r    = face l
+vertical :: HeightPair -> String
+vertical (l, r) | l == r    = face l
              | l == 0    = side r
              | r == 0    = side l
-             | otherwise = step (l, r)
+             | otherwise = rise (l, r)
 
 pad :: Int -> String -> String
 pad i s = s ++ replicate (i - length s) ' '
