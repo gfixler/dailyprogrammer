@@ -4,13 +4,13 @@ import Data.List (transpose)
 
 type HeightPair = (Int, Int)
 
-sumHeights :: Num a => [a] -> [a] -> [a]
-sumHeights xs [] = xs
-sumHeights [] ys = ys
-sumHeights (x:xs) (y:ys) = x + y : sumHeights xs ys
+sumLists :: Num a => [a] -> [a] -> [a]
+sumLists xs [] = xs
+sumLists [] ys = ys
+sumLists (x:xs) (y:ys) = x + y : sumLists xs ys
 
 heights :: String -> [Int]
-heights = foldr1 sumHeights . map (map height) . lines
+heights = foldr1 sumLists . map (map height) . lines
     where height x = if x == ' ' then 0 else 1
 
 heightPairs :: [Int] -> [HeightPair]
