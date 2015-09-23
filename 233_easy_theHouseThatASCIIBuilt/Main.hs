@@ -44,11 +44,6 @@ padBox :: [String] -> [String]
 padBox xs = map (pad z) xs
     where z = maximum (map length xs)
 
-inflate :: String -> [String]
-inflate s = js
-    where ps = heightPairs (heights s)
-          js = map joint ps
-
 upright :: [String] -> String
 upright = unlines . reverse . transpose . padBox
 
