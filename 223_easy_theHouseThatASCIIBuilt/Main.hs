@@ -1,6 +1,6 @@
 module Main where
 
-import Data.List (transpose)
+import Data.List (group, transpose, intercalate)
 
 heights :: String -> [Int]
 heights = map length . map (takeWhile (=='*')) . map reverse . transpose . lines
@@ -47,6 +47,15 @@ padBox xs = map (pad z) xs
 
 upright :: [String] -> String
 upright = unlines . reverse . transpose . padBox
+
+build :: String -> String
+build s = upright $ zipWith (++) zs rs
+    where
+        hs = heights s
+        vs = map (\x -> [vertical x]) (heightPairs hs)
+        ws = map horizontal hs
+        zs = concat $ interleave [vs, ws]
+        rs = [" "] ++ (intercalate [""] $ map (roof . (*2) . length) (group hs)) ++ [" "]
 
 input1 = "   *\n  ***\n******"
 input2 = " *\n***\n***\n***\n***\n***\n***"
