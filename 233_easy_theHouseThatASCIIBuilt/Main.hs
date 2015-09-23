@@ -2,6 +2,23 @@ module Main where
 
 import Data.List (group, transpose, intercalate)
 
+-- utility function to join lists together in a particular way
+interleave :: [[a]] -> [a]
+interleave = concat . transpose
+
+-- utility function to right-space-pad string out to given length
+pad :: Int -> String -> String
+pad i s = s ++ replicate (i - length s) ' '
+
+-- transpose-helper; right-space-pads list of strings to longest member
+padBox :: [String] -> [String]
+padBox xs = map (pad z) xs
+    where z = maximum (map length xs)
+
+-- pads/rotates string list counter-clockwise, merges to multiline string
+upright :: [String] -> String
+upright = unlines . reverse . transpose . padBox
+
 -- turns multiline string into counts of vertical, grounded, asterisk columns
 heights :: String -> [Int]
 heights = map length . map (takeWhile (=='*')) . map reverse . transpose . lines
@@ -41,10 +58,6 @@ vertical (l, r) | l == r    = face l
 horizontal :: Int -> [String]
 horizontal n = replicate 3 (face n)
 
--- utility function to join lists together in a particular way
-interleave :: [[a]] -> [a]
-interleave = concat . transpose
-
 -- builds entire wall - verticals and space-fills - for list of heights
 walls :: [Int] -> [String]
 walls xs = concat (interleave [joins, walls])
@@ -63,19 +76,6 @@ roofs xs = [" "] ++ (intercalate [""] $ map (roof . (*2) . length) (group xs)) +
 building :: String -> String
 building s = upright $ zipWith (++) (walls hs) (roofs hs)
     where hs = heights s
-
--- utility function to right-space-pad string out to given length
-pad :: Int -> String -> String
-pad i s = s ++ replicate (i - length s) ' '
-
--- transpose-helper; right-space-pads list of strings to longest member
-padBox :: [String] -> [String]
-padBox xs = map (pad z) xs
-    where z = maximum (map length xs)
-
--- pads/rotates string list counter-clockwise, merges to multiline string
-upright :: [String] -> String
-upright = unlines . reverse . transpose . padBox
 
 -- example inputs for use with building function
 input1 = "   *\n  ***\n******"
