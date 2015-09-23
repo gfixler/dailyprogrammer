@@ -65,7 +65,7 @@ walls xs = concat (interleave [joins, walls])
     where joins = map (\x -> [vertical x]) (heightPairs xs)
           walls = map horizontal xs
 
--- builds up a given-unit-wide - times magic number - roof
+-- builds up a given-unit-wide roof
 roof :: Int -> [String]
 roof w = last $ take w $ iterate ((["/"]++) . (++["\\"]) . (map (' ':))) ["A"]
 
