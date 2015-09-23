@@ -43,6 +43,9 @@ horizontal n = replicate 3 (face n)
 interleave :: [[a]] -> [a]
 interleave = concat . transpose
 
+roof :: Int -> [String]
+roof w = last $ take w $ iterate ((["/"]++) . (++["\\"]) . (map (' ':))) ["A"]
+
 pad :: Int -> String -> String
 pad i s = s ++ replicate (i - length s) ' '
 
