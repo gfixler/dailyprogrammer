@@ -32,9 +32,9 @@ step (l, r) = lower ++ upper
           upper = vert '|' (abs (l-r)) ++ "+"
 
 joint :: HeightPair -> String
-joint (0, r) = side r
-joint (l, 0) = side l
-joint (l, r) | l == r = face l
+joint (l, r) | l == r    = face l
+             | l == 0    = side r
+             | r == 0    = side l
              | otherwise = step (l, r)
 
 pad :: Int -> String -> String
