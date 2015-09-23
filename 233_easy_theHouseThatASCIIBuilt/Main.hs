@@ -27,6 +27,12 @@ side i = '+' : vert '|' i ++ "+"
 face :: Int -> String
 face i = '-' : vert ' ' i ++ "-"
 
+joint :: (Int, Int) -> String
+joint (0, r) = side r
+joint (l, 0) = side l
+joint (l, r) | l == r = face l
+             | otherwise = face (min l r) ++ vert '|' (abs (l-r)) ++ "+"
+
 input1 = "   *\n  ***\n******"
 input2 = " *\n***\n***\n***\n***\n***\n***"
 challenge1 = "    **\n*** **\n******"
