@@ -9,12 +9,9 @@ sumHeights xs [] = xs
 sumHeights [] ys = ys
 sumHeights (x:xs) (y:ys) = x + y : sumHeights xs ys
 
-height :: Char -> Int
-height ' ' = 0
-height _   = 1
-
 heights :: String -> [Int]
 heights = foldr1 sumHeights . map (map height) . lines
+    where height x = if x == ' ' then 0 else 1
 
 heightPairs :: [Int] -> [HeightPair]
 heightPairs xs = zip hs (tail hs)
