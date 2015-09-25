@@ -6,8 +6,8 @@ type CharGrid = M.Map (Int, Int) Char
 type Coord = (Int, Int)
 
 -- maps XY positions in [potentially multiline] String to their Chars
-stringrid :: String -> CharGrid
-stringrid = M.fromList . g (0, 0)
+charGrid :: String -> CharGrid
+charGrid = M.fromList . g (0, 0)
     where g :: (Int, Int) -> String -> [((Int, Int), Char)]
           g _ []             = []
           g (x, y) ('\n':cs) = g (0, succ y) cs
