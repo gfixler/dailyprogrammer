@@ -1,6 +1,6 @@
 module Main where
 
-import qualified Data.Map as M (Map, fromList, keys)
+import qualified Data.Map as M (Map, fromList, keys, lookup)
 
 type CharGrid = M.Map (Int, Int) Char
 type Coord = (Int, Int)
@@ -24,4 +24,9 @@ bbox m = ((xl, yl), (xh, yh))
           yl = minimum ys
           xh = maximum xs
           yh = maximum ys
+
+alive :: CharGrid -> Coord -> Bool
+alive g c = case (M.lookup c g) of Nothing  -> False
+                                   Just ' ' -> False
+                                   _        -> True
 
